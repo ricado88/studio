@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import ProductRecommendations from '@/components/ai/ProductRecommendations'; // For AI recommendations on cart page
-import { ShoppingCart, CreditCard, Banknote } from 'lucide-react';
+import { ShoppingCart, CreditCard, Banknote, Mail } from 'lucide-react';
 import { Separator } from '@/components/ui/separator';
 
 export default function CartPage() {
@@ -72,7 +72,11 @@ export default function CartPage() {
                     Zelle (USD)
                   </li>
                 </ul>
-                <p className="text-xs text-muted-foreground mt-3">
+                <p className="text-xs text-muted-foreground mt-3 flex items-center">
+                  <Mail className="mr-2 h-4 w-4 text-primary" />
+                  Recibirás tu factura por correo electrónico.
+                </p>
+                <p className="text-xs text-muted-foreground mt-1">
                   Al proceder al pago, recibirás las instrucciones para completar tu orden.
                 </p>
               </div>
