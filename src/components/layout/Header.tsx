@@ -108,19 +108,19 @@ export default function Header() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={link.ariaLabel}
-                className="text-foreground/70 hover:text-primary transition-colors p-2"
+                className="text-primary hover:text-primary/70 transition-colors p-2"
               >
                 {link.icon}
               </a>
             ))}
              <div className="hidden md:flex items-center gap-1 ml-2 text-xs text-foreground/60">
                 <a href={`mailto:${contactEmail}`} className="hover:text-primary transition-colors flex items-center p-1" title={contactEmail}>
-                    <Mail className="h-4 w-4 mr-1" />
+                    <Mail className="h-4 w-4 mr-1 text-primary" />
                     <span>Email</span>
                 </a>
                 <span className="opacity-50 mx-1">|</span>
                 <a href={`tel:${contactPhone}`} className="hover:text-primary transition-colors flex items-center p-1" title={contactPhone}>
-                    <Phone className="h-4 w-4 mr-1" />
+                    <Phone className="h-4 w-4 mr-1 text-primary" />
                     <span>Teléfono</span>
                 </a>
             </div>
@@ -170,7 +170,7 @@ export default function Header() {
                           target="_blank"
                           rel="noopener noreferrer"
                           aria-label={link.ariaLabel}
-                          className="text-foreground/70 hover:text-primary transition-colors"
+                          className="text-primary hover:text-primary/70 transition-colors"
                         >
                           {link.icon}
                         </a>
@@ -180,11 +180,11 @@ export default function Header() {
                   <hr className="my-2"/>
                   <div className="px-2 py-2">
                     <p className="text-sm font-medium text-muted-foreground mb-2">Contáctanos:</p>
-                    <a href={`mailto:${contactEmail}`} className="flex items-center text-sm hover:text-primary transition-colors py-1">
+                    <a href={`mailto:${contactEmail}`} className="flex items-center text-sm text-primary hover:text-primary/70 transition-colors py-1">
                       <Mail className="mr-2 h-4 w-4" />
                       {contactEmail}
                     </a>
-                    <a href={`tel:${contactPhone}`} className="flex items-center text-sm hover:text-primary transition-colors py-1 mt-1">
+                    <a href={`tel:${contactPhone}`} className="flex items-center text-sm text-primary hover:text-primary/70 transition-colors py-1 mt-1">
                       <Phone className="mr-2 h-4 w-4" />
                       {contactPhone}
                     </a>
