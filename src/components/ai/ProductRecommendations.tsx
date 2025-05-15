@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useEffect, useState } from 'react';
@@ -38,10 +39,15 @@ export default function ProductRecommendations({
         const parsedHistory = JSON.parse(storedHistory);
         if (Array.isArray(parsedHistory)) {
           setViewingHistory(parsedHistory);
+        } else {
+          console.warn('Viewing history in ProductRecommendations (localStorage) was malformed. Resetting.');
+          localStorage.removeItem(VIEWING_HISTORY_KEY);
+          setViewingHistory([]); 
         }
       } catch (e) {
-        console.error("Failed to parse viewing history:", e);
+        console.error("Failed to parse viewing history from localStorage (ProductRecommendations):", e);
         localStorage.removeItem(VIEWING_HISTORY_KEY);
+        setViewingHistory([]);
       }
     }
   }, []);
@@ -91,11 +97,16 @@ export default function ProductRecommendations({
 
     // Fetch recommendations if cart, history, or search term changes
     // or if triggerViewHistoryProductIds changes (indicating a new page view)
-    if (cartItems.length > 0 || viewingHistory.length > 0 || contextSearchTerm || triggerViewHistoryProductIds) {
+    if (cartItems.length > 0 || viewingHistory.length > 0 || contextSearchTerm || (triggerViewHistoryProductIds && triggerViewHistoryProductIds.length > 0) ) {
        fetchRecommendations();
+    } else if (!currentProductId && cartItems.length === 0 && viewingHistory.length === 0 && !contextSearchTerm) {
+      // If no context at all (e.g. on an empty cart page with no history), fetch general recommendations or popular items
+      // For now, let's assume fetchRecommendations can handle an empty input gracefully or define specific logic here.
+      // fetchRecommendations(); // Or, set some default popular items.
+      // To avoid calling with completely empty input if not desired:
+       setRecommendations([]);
     } else {
-       // If no context, maybe show some popular items or clear recommendations
-       setRecommendations([]); // Or some default popular items
+       setRecommendations([]); 
     }
 
   }, [cartItems, viewingHistory, contextSearchTerm, currentProductId, maxRecommendations, triggerViewHistoryProductIds]);

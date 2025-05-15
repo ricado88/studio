@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useEffect, useState } from 'react';
@@ -35,8 +36,17 @@ export default function ProductDetailPage() {
       if (storedHistory) {
         try {
           const parsed = JSON.parse(storedHistory);
-          if(Array.isArray(parsed)) historyArray = parsed;
-        } catch (e) { console.error("Error parsing viewing history", e); }
+          if (Array.isArray(parsed)) {
+            historyArray = parsed;
+          } else {
+            // If not an array, it's corrupted. Clear it.
+            console.warn('Viewing history in localStorage (ProductDetailPage) was malformed. Resetting.');
+            localStorage.removeItem(VIEWING_HISTORY_KEY);
+          }
+        } catch (e) { 
+          console.error("Error parsing viewing history from localStorage (ProductDetailPage):", e);
+          localStorage.removeItem(VIEWING_HISTORY_KEY); // Clear if parsing fails
+        }
       }
       
       // Add current product to the beginning, remove duplicates, limit size
