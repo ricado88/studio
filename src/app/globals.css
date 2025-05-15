@@ -8,52 +8,52 @@ body {
 
 @layer base {
   :root {
-    --background: 0 0% 96.1%; /* Light Gray - #F5F5F5 */
-    --foreground: 0 0% 3.9%; /* Dark Gray/Black */
+    --background: 0 0% 97%;        /* Approx #F8F8F8, very light gray */
+    --foreground: 0 0% 20%;        /* Approx #333333, dark gray for text */
 
-    --card: 0 0% 100%; /* White */
-    --card-foreground: 0 0% 3.9%;
+    --card: 0 0% 100%;             /* White */
+    --card-foreground: 0 0% 20%;   /* Dark gray text on cards */
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 3.9%;
+    --popover: 0 0% 100%;          /* White */
+    --popover-foreground: 0 0% 20%;/* Dark gray text on popovers */
 
-    --primary: 120 39% 49%; /* Vibrant Green - #4CAF50 */
-    --primary-foreground: 0 0% 98%; /* White */
+    --primary: 204 100% 38%;       /* Blue #0076BF */
+    --primary-foreground: 0 0% 98%;/* White text on primary */
 
-    --secondary: 0 0% 92%; /* Slightly darker gray for subtle UI elements */
-    --secondary-foreground: 0 0% 9%;
+    --secondary: 0 0% 93%;         /* Light Gray #ECECEC for secondary elements */
+    --secondary-foreground: 0 0% 9%;/* Dark text on secondary */
 
-    --muted: 0 0% 90%; /* Adjusted Muted */
-    --muted-foreground: 0 0% 45.1%;
+    --muted: 0 0% 94%;             /* Lighter Gray for muted backgrounds #F0F0F0 */
+    --muted-foreground: 208 10% 46%;/* Muted text color #6F7C87 (similar to #6c757d) */
 
-    --accent: 54 93% 61%; /* Yellow - #FFEB3B */
-    --accent-foreground: 0 0% 9%; /* Dark text for accent */
+    --accent: 39 100% 49%;         /* Orange/Yellow #F8A000 */
+    --accent-foreground: 0 0% 9%;  /* Dark text on accent */
 
-    --destructive: 0 84.2% 60.2%;
+    --destructive: 0 84.2% 60.2%;   /* Default red, can keep or adjust if site has specific error red */
     --destructive-foreground: 0 0% 98%;
 
-    --border: 0 0% 89.8%;
-    --input: 0 0% 89.8%;
-    --ring: 120 39% 49%; /* Primary color for focus rings */
+    --border: 210 17% 89%;         /* Gray border #DEE2E6 */
+    --input: 210 17% 89%;          /* Gray input border, same as border */
+    --ring: 204 100% 38%;          /* Primary color for focus rings */
 
     --radius: 0.5rem;
 
-    /* Chart colors - can be adjusted if charts are heavily used */
-    --chart-1: 120 39% 49%; /* primary */
-    --chart-2: 54 93% 61%;  /* accent */
-    --chart-3: 197 37% 24%;
-    --chart-4: 43 74% 66%;
-    --chart-5: 27 87% 67%;
+    /* Chart colors */
+    --chart-1: 204 100% 38%; /* primary (blue) */
+    --chart-2: 39 100% 49%;  /* accent (orange/yellow) */
+    --chart-3: 210 80% 60%;  /* lighter blue */
+    --chart-4: 45 90% 60%;   /* lighter orange/yellow */
+    --chart-5: 190 70% 50%;  /* cyan-blue */
 
-    /* Sidebar specific colors - adjust if sidebar is used with a different theme */
-    --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 120 39% 49%; /* Match primary */
-    --sidebar-primary-foreground: 0 0% 98%; /* Match primary-foreground */
-    --sidebar-accent: 0 0% 95.9%;
-    --sidebar-accent-foreground: 240 5.9% 10%;
-    --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 120 39% 49%; /* Match ring */
+    /* Sidebar specific colors */
+    --sidebar-background: 0 0% 100%;       /* White */
+    --sidebar-foreground: 0 0% 20%;       /* Dark text */
+    --sidebar-primary: 204 100% 38%;      /* new primary */
+    --sidebar-primary-foreground: 0 0% 98%;/* White text */
+    --sidebar-accent: 0 0% 95%;           /* Light gray for hover/active #F2F2F2 */
+    --sidebar-accent-foreground: 0 0% 9%; /* Dark text */
+    --sidebar-border: 210 17% 89%;       /* new border color */
+    --sidebar-ring: 204 100% 38%;         /* new primary */
   }
 
   .dark {
@@ -66,7 +66,7 @@ body {
     --popover: 0 0% 3.9%;
     --popover-foreground: 0 0% 98%;
 
-    --primary: 120 39% 55%; /* Slightly lighter green for dark mode */
+    --primary: 204 100% 42%; /* Adjusted blue for dark mode */
     --primary-foreground: 0 0% 9%; 
 
     --secondary: 0 0% 14.9%;
@@ -75,7 +75,7 @@ body {
     --muted: 0 0% 14.9%;
     --muted-foreground: 0 0% 63.9%;
 
-    --accent: 54 93% 55%; /* Slightly muted yellow for dark mode */
+    --accent: 39 100% 53%; /* Adjusted orange/yellow for dark mode */
     --accent-foreground: 0 0% 9%;
 
     --destructive: 0 62.8% 30.6%;
@@ -83,22 +83,23 @@ body {
 
     --border: 0 0% 14.9%;
     --input: 0 0% 14.9%;
-    --ring: 120 39% 55%; /* Primary color for focus rings in dark mode */
+    --ring: 204 100% 42%; /* Primary color for focus rings in dark mode */
     
-    --chart-1: 120 39% 55%;
-    --chart-2: 54 93% 55%;
-    --chart-3: 30 80% 55%;
-    --chart-4: 280 65% 60%;
-    --chart-5: 340 75% 55%;
+    /* Chart colors for dark mode - can be refined based on new primary/accent */
+    --chart-1: 204 100% 42%;
+    --chart-2: 39 100% 53%;
+    --chart-3: 210 70% 50%;
+    --chart-4: 45 80% 50%;
+    --chart-5: 190 60% 40%;
 
-    --sidebar-background: 240 5.9% 10%;
+    --sidebar-background: 240 5.9% 10%; /* Can adjust these if a specific dark sidebar theme is needed */
     --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 120 39% 55%;
+    --sidebar-primary: 204 100% 42%;
     --sidebar-primary-foreground: 0 0% 9%;
     --sidebar-accent: 240 3.7% 15.9%;
     --sidebar-accent-foreground: 240 4.8% 95.9%;
     --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 120 39% 55%;
+    --sidebar-ring: 204 100% 42%;
   }
 }
 
