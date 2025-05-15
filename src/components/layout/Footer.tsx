@@ -1,4 +1,5 @@
-import { Facebook, Instagram } from 'lucide-react';
+
+import { Facebook, Instagram, CreditCard } from 'lucide-react';
 
 export default function Footer() {
   return (
@@ -13,6 +14,12 @@ export default function Footer() {
           <p>
             Teléfono: <a href="tel:+5354423736" className="hover:text-primary transition-colors">+53 54423736</a>
           </p>
+        </div>
+        <div className="mt-4">
+          <p className="font-medium flex items-center justify-center">
+             <CreditCard className="mr-2 h-4 w-4 text-primary" /> Métodos de Pago:
+          </p>
+          <p>Transferencia Bancaria (USD) y Zelle (USD).</p>
         </div>
         <div className="mt-4 flex justify-center items-center space-x-4">
           <a 

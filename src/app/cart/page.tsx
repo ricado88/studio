@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useCart } from '@/context/CartContext';
@@ -6,7 +7,8 @@ import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import ProductRecommendations from '@/components/ai/ProductRecommendations'; // For AI recommendations on cart page
-import { ShoppingCart } from 'lucide-react';
+import { ShoppingCart, CreditCard, Banknote } from 'lucide-react';
+import { Separator } from '@/components/ui/separator';
 
 export default function CartPage() {
   const { items, totalItems, totalPrice, clearCart } = useCart();
@@ -53,6 +55,26 @@ export default function CartPage() {
               <div className="flex justify-between font-bold text-xl">
                 <span>Total</span>
                 <span>${totalPrice.toFixed(2)}</span>
+              </div>
+              <Separator className="my-4" />
+              <div>
+                <h4 className="font-semibold mb-3 text-md flex items-center">
+                  <CreditCard className="mr-2 h-5 w-5 text-primary" />
+                  Métodos de Pago Aceptados:
+                </h4>
+                <ul className="space-y-1 text-sm text-muted-foreground">
+                  <li className="flex items-center">
+                    <Banknote className="mr-2 h-4 w-4 text-green-600" />
+                    Transferencia Bancaria (USD)
+                  </li>
+                  <li className="flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-2 text-blue-600 lucide lucide-send"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
+                    Zelle (USD)
+                  </li>
+                </ul>
+                <p className="text-xs text-muted-foreground mt-3">
+                  Al proceder al pago, recibirás las instrucciones para completar tu orden.
+                </p>
               </div>
             </CardContent>
             <CardFooter className="flex flex-col gap-4">
