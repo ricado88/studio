@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import ProductRecommendations from '@/components/ai/ProductRecommendations'; // For AI recommendations on cart page
-import { ShoppingCart, CreditCard, Banknote, Mail, Send } from 'lucide-react';
+import { ShoppingCart, CreditCard, Banknote, Mail, Send, Bitcoin } from 'lucide-react';
 import { Separator } from '@/components/ui/separator';
 
 export default function CartPage() {
@@ -64,12 +64,19 @@ export default function CartPage() {
                 </h4>
                 <ul className="space-y-1 text-sm text-muted-foreground">
                   <li className="flex items-center">
-                    <Banknote className="mr-2 h-4 w-4 text-primary" /> {/* Changed color to primary */}
+                    <Banknote className="mr-2 h-4 w-4 text-primary" />
                     Transferencia Bancaria (USD)
                   </li>
                   <li className="flex items-center">
-                    <Send className="mr-2 h-4 w-4 text-primary" /> {/* Changed to Send icon and primary color */}
+                    <Send className="mr-2 h-4 w-4 text-primary" />
                     Zelle (USD)
+                  </li>
+                  <li className="flex items-start"> {/* Changed to items-start for multi-line address */}
+                    <Bitcoin className="mr-2 h-4 w-4 text-primary mt-0.5 flex-shrink-0" />
+                    <span>
+                      Criptomonedas (USDT, ETH, BTC, etc.)<br />
+                      <span className="text-xs break-all">Wallet: 0x7d3a432442Ca595b2Cc3Eb22e24f36833802B067</span>
+                    </span>
                   </li>
                 </ul>
                 <p className="text-xs text-muted-foreground mt-3 flex items-center">

@@ -1,5 +1,5 @@
 
-import { Facebook, Instagram, CreditCard } from 'lucide-react';
+import { Facebook, Instagram, CreditCard, Bitcoin } from 'lucide-react';
 
 export default function Footer() {
   return (
@@ -20,6 +20,10 @@ export default function Footer() {
              <CreditCard className="mr-2 h-4 w-4 text-primary" /> Métodos de Pago:
           </p>
           <p>Transferencia Bancaria (USD) y Zelle (USD).</p>
+          <p className="flex items-center justify-center mt-1">
+            <Bitcoin className="mr-2 h-4 w-4 text-primary" /> Criptomonedas:
+          </p>
+          <p className="text-xs break-all">0x7d3a432442Ca595b2Cc3Eb22e24f36833802B067</p>
         </div>
         <div className="mt-4 flex justify-center items-center space-x-4">
           <a 
