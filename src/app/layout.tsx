@@ -1,9 +1,11 @@
+
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google'; // Corrected import name
 import './globals.css';
 import { Providers } from '@/components/Providers';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
+import WhatsAppButton from '@/components/layout/WhatsAppButton'; // Importar el nuevo componente
 
 const geistSans = Geist({ // Corrected usage
   variable: '--font-geist-sans',
@@ -34,6 +36,7 @@ export default function RootLayout({
             {children}
           </main>
           <Footer />
+          <WhatsAppButton /> {/* Añadir el botón de WhatsApp aquí */}
         </Providers>
       </body>
     </html>
