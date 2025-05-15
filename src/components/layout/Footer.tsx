@@ -1,3 +1,5 @@
+import { Facebook } from 'lucide-react';
+
 export default function Footer() {
   return (
     <footer className="border-t bg-secondary">
@@ -11,6 +13,17 @@ export default function Footer() {
           <p>
             Teléfono: <a href="tel:+5354423736" className="hover:text-primary transition-colors">+53 54423736</a>
           </p>
+        </div>
+        <div className="mt-4 flex justify-center items-center space-x-4">
+          <a 
+            href="https://www.facebook.com/share/16Ps1cE95j/" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            aria-label="Facebook de ComboExpress88"
+            className="text-secondary-foreground hover:text-primary transition-colors"
+          >
+            <Facebook size={24} />
+          </a>
         </div>
         <p className="mt-4">
           <a href="#" className="hover:text-primary transition-colors">Política de Privacidad</a> | 
