@@ -1,7 +1,8 @@
+
 "use client";
 
 import Link from 'next/link';
-import { ShoppingCart, Search, Menu } from 'lucide-react';
+import { ShoppingCart, Search, Menu, LogInIcon, UserPlusIcon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useCart } from '@/context/CartContext';
@@ -30,7 +31,13 @@ export default function Header() {
   const navLinks = [
     { href: '/', label: 'Inicio' },
     { href: '/products', label: 'Productos' },
-    // Add more links as needed, e.g., offers, contact
+    // { href: '/offers', label: 'Ofertas' }, // Example
+    // { href: '/contact', label: 'Contacto' }, // Example
+  ];
+
+  const authLinks = [
+    { href: '/login', label: 'Iniciar Sesión', icon: <LogInIcon className="mr-2 h-4 w-4 inline" /> },
+    { href: '/register', label: 'Registrarse', icon: <UserPlusIcon className="mr-2 h-4 w-4 inline" /> },
   ];
 
   return (
@@ -44,7 +51,7 @@ export default function Header() {
           <span className="text-xl font-bold text-primary">ComboExpress88</span>
         </Link>
 
-        <nav className="hidden md:flex items-center gap-6">
+        <nav className="hidden md:flex items-center gap-4 lg:gap-6">
           {navLinks.map(link => (
             <Link key={link.href} href={link.href} className="text-sm font-medium text-foreground/70 hover:text-foreground transition-colors">
               {link.label}
@@ -52,25 +59,36 @@ export default function Header() {
           ))}
         </nav>
 
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-2 sm:gap-3">
           <form onSubmit={handleSearch} className="hidden sm:flex items-center gap-2">
             <Input 
               type="search" 
               placeholder="Buscar productos..." 
-              className="h-9 w-40 lg:w-64"
+              className="h-9 w-32 lg:w-56"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
-            <Button type="submit" size="sm" variant="ghost" aria-label="Buscar">
+            <Button type="submit" size="sm" variant="ghost" aria-label="Buscar" className="h-9 w-9 p-0">
               <Search className="h-5 w-5" />
             </Button>
           </form>
           
+          <div className="hidden md:flex items-center gap-2">
+            {authLinks.map(link => (
+               <Link key={link.href} href={link.href} passHref>
+                <Button variant="ghost" size="sm" className="text-sm font-medium text-foreground/70 hover:text-foreground">
+                  {link.icon}
+                  {link.label}
+                </Button>
+              </Link>
+            ))}
+          </div>
+          
           <Link href="/cart" passHref>
-            <Button variant="outline" size="icon" aria-label="Carrito de compras">
+            <Button variant="outline" size="icon" aria-label="Carrito de compras" className="relative h-9 w-9">
               <ShoppingCart className="h-5 w-5" />
               {isMounted && totalItems > 0 && (
-                <Badge variant="destructive" className="absolute -top-2 -right-2 h-5 w-5 p-0 flex items-center justify-center text-xs">
+                <Badge variant="destructive" className="absolute -top-1.5 -right-1.5 h-4.5 w-4.5 p-0 flex items-center justify-center text-xs rounded-full">
                   {totalItems}
                 </Badge>
               )}
@@ -80,15 +98,22 @@ export default function Header() {
           <div className="md:hidden">
             <Sheet>
               <SheetTrigger asChild>
-                <Button variant="outline" size="icon">
+                <Button variant="outline" size="icon" className="h-9 w-9">
                   <Menu className="h-5 w-5" />
                   <span className="sr-only">Abrir menú</span>
                 </Button>
               </SheetTrigger>
-              <SheetContent side="right">
-                <nav className="flex flex-col gap-4 mt-8">
+              <SheetContent side="right" className="w-[280px] sm:w-[320px]">
+                <nav className="flex flex-col gap-3 mt-8">
                   {navLinks.map(link => (
-                    <Link key={link.href} href={link.href} className="text-lg font-medium hover:text-primary transition-colors">
+                    <Link key={`mobile-${link.href}`} href={link.href} className="text-base font-medium hover:text-primary transition-colors py-2 px-2 rounded-md hover:bg-muted">
+                      {link.label}
+                    </Link>
+                  ))}
+                  <hr className="my-2"/>
+                  {authLinks.map(link => (
+                     <Link key={`mobile-${link.href}`} href={link.href} className="text-base font-medium hover:text-primary transition-colors py-2 px-2 rounded-md hover:bg-muted flex items-center">
+                      {link.icon}
                       {link.label}
                     </Link>
                   ))}
