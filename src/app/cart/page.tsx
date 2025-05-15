@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import ProductRecommendations from '@/components/ai/ProductRecommendations'; // For AI recommendations on cart page
-import { ShoppingCart, CreditCard, Banknote, Mail } from 'lucide-react';
+import { ShoppingCart, CreditCard, Banknote, Mail, Send } from 'lucide-react';
 import { Separator } from '@/components/ui/separator';
 
 export default function CartPage() {
@@ -64,11 +64,11 @@ export default function CartPage() {
                 </h4>
                 <ul className="space-y-1 text-sm text-muted-foreground">
                   <li className="flex items-center">
-                    <Banknote className="mr-2 h-4 w-4 text-green-600" />
+                    <Banknote className="mr-2 h-4 w-4 text-primary" /> {/* Changed color to primary */}
                     Transferencia Bancaria (USD)
                   </li>
                   <li className="flex items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-2 text-blue-600 lucide lucide-send"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
+                    <Send className="mr-2 h-4 w-4 text-primary" /> {/* Changed to Send icon and primary color */}
                     Zelle (USD)
                   </li>
                 </ul>

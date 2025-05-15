@@ -1,3 +1,4 @@
+
 "use client";
 
 import type { Product } from '@/types';
@@ -24,7 +25,7 @@ export default function ProductCard({ product }: ProductCardProps) {
               src={product.imageUrl}
               alt={product.name}
               fill
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, (max-width: 1279px) 33vw, 25vw"
               className="object-cover group-hover:scale-105 transition-transform duration-300 ease-in-out"
               data-ai-hint={product.dataAiHint || "product image"}
             />
@@ -43,10 +44,17 @@ export default function ProductCard({ product }: ProductCardProps) {
           onClick={() => addToCart(product)} 
           className="w-full"
           aria-label={`Añadir ${product.name} al carrito`}
+          disabled={product.stock === 0}
         >
-          <ShoppingCart className="mr-2 h-4 w-4" /> Añadir al Carrito
+          <ShoppingCart className="mr-2 h-4 w-4" /> {product.stock > 0 ? 'Añadir al Carrito' : 'Agotado'}
         </Button>
       </CardFooter>
+       {product.stock > 0 && product.stock < 10 && (
+            <p className="text-xs text-destructive px-4 pb-2">¡Sólo quedan {product.stock} unidades!</p>
+        )}
+        {product.stock === 0 && (
+            <p className="text-xs text-destructive px-4 pb-2">Este producto está actualmente agotado.</p>
+        )}
     </Card>
   );
 }
