@@ -1,4 +1,4 @@
-import { Facebook } from 'lucide-react';
+import { Facebook, Instagram } from 'lucide-react';
 
 export default function Footer() {
   return (
@@ -23,6 +23,15 @@ export default function Footer() {
             className="text-secondary-foreground hover:text-primary transition-colors"
           >
             <Facebook size={24} />
+          </a>
+          <a 
+            href="https://www.instagram.com/combospress/profilecard/?igsh=dHYzc2dvY3JpODc5" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            aria-label="Instagram de ComboExpress88"
+            className="text-secondary-foreground hover:text-primary transition-colors"
+          >
+            <Instagram size={24} />
           </a>
         </div>
         <p className="mt-4">
