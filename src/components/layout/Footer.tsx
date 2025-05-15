@@ -1,5 +1,5 @@
 
-import { Facebook, Instagram, CreditCard, Bitcoin } from 'lucide-react';
+import { CreditCard, Bitcoin } from 'lucide-react';
 
 export default function Footer() {
   return (
@@ -25,26 +25,6 @@ export default function Footer() {
           </p>
           <p className="text-xs">Red: BSC (BEP20)</p>
           <p className="text-xs break-all">Wallet: 0x7d3a432442Ca595b2Cc3Eb22e24f36833802B067</p>
-        </div>
-        <div className="mt-4 flex justify-center items-center space-x-4">
-          <a 
-            href="https://www.facebook.com/share/16Ps1cE95j/" 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            aria-label="Facebook de ComboExpress88"
-            className="text-secondary-foreground hover:text-primary transition-colors"
-          >
-            <Facebook size={24} />
-          </a>
-          <a 
-            href="https://www.instagram.com/combospress/profilecard/?igsh=dHYzc2dvY3JpODc5" 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            aria-label="Instagram de ComboExpress88"
-            className="text-secondary-foreground hover:text-primary transition-colors"
-          >
-            <Instagram size={24} />
-          </a>
         </div>
         <p className="mt-4">
           <a href="#" className="hover:text-primary transition-colors">Política de Privacidad</a> | 

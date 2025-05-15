@@ -2,7 +2,7 @@
 "use client";
 
 import Link from 'next/link';
-import { ShoppingCart, Search, Menu, LogInIcon, UserPlusIcon } from 'lucide-react';
+import { ShoppingCart, Search, Menu, LogInIcon, UserPlusIcon, Facebook, Instagram } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useCart } from '@/context/CartContext';
@@ -40,6 +40,21 @@ export default function Header() {
     { href: '/register', label: 'Registrarse', icon: <UserPlusIcon className="mr-2 h-4 w-4 inline" /> },
   ];
 
+  const socialLinks = [
+    { 
+      href: "https://www.facebook.com/share/16Ps1cE95j/", 
+      label: "Facebook", 
+      icon: <Facebook size={20} />, 
+      ariaLabel: "Facebook de ComboExpress88" 
+    },
+    { 
+      href: "https://www.instagram.com/combospress/profilecard/?igsh=dHYzc2dvY3JpODc5", 
+      label: "Instagram", 
+      icon: <Instagram size={20} />, 
+      ariaLabel: "Instagram de ComboExpress88" 
+    },
+  ];
+
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
@@ -74,14 +89,26 @@ export default function Header() {
             </Button>
           </form>
           
-          <div className="hidden md:flex items-center gap-2">
+          <div className="hidden md:flex items-center gap-1">
             {authLinks.map(link => (
                <Link key={link.href} href={link.href} passHref>
-                <Button variant="ghost" size="sm" className="text-sm font-medium text-foreground/70 hover:text-foreground">
+                <Button variant="ghost" size="sm" className="text-sm font-medium text-foreground/70 hover:text-foreground px-2">
                   {link.icon}
                   {link.label}
                 </Button>
               </Link>
+            ))}
+            {socialLinks.map(link => (
+              <a
+                key={link.href}
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={link.ariaLabel}
+                className="text-foreground/70 hover:text-primary transition-colors p-2"
+              >
+                {link.icon}
+              </a>
             ))}
           </div>
           
@@ -118,6 +145,24 @@ export default function Header() {
                       {link.label}
                     </Link>
                   ))}
+                  <hr className="my-2"/>
+                  <div className="px-2 py-2">
+                    <p className="text-sm font-medium text-muted-foreground mb-2">Síguenos:</p>
+                    <div className="flex gap-4">
+                      {socialLinks.map(link => (
+                        <a
+                          key={`mobile-${link.href}`}
+                          href={link.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label={link.ariaLabel}
+                          className="text-foreground/70 hover:text-primary transition-colors"
+                        >
+                          {link.icon}
+                        </a>
+                      ))}
+                    </div>
+                  </div>
                    <form onSubmit={handleSearch} className="flex flex-col gap-2 mt-4">
                     <Input 
                       type="search" 
