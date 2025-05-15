@@ -9,9 +9,45 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/componen
 import ProductRecommendations from '@/components/ai/ProductRecommendations'; // For AI recommendations on cart page
 import { ShoppingCart, CreditCard, Banknote, Mail, Send, Bitcoin } from 'lucide-react';
 import { Separator } from '@/components/ui/separator';
+import { useToast } from '@/hooks/use-toast'; // Import useToast
 
 export default function CartPage() {
   const { items, totalItems, totalPrice, clearCart } = useCart();
+  const { toast } = useToast(); // Initialize useToast
+
+  const handleProceedToPayment = () => {
+    // Simulate placing the order
+    console.log('Order placed with items:', items);
+    console.log('Total amount:', totalPrice.toFixed(2));
+    // More items for logging if needed:
+    // console.log('Customer details (if available):', /* customer data */);
+
+    toast({
+      title: '¡Pedido Realizado con Éxito!',
+      description: 'Revisa tu correo para las instrucciones de pago. Una vez confirmado el pago, recibirás tu factura.',
+      duration: 6000, // Slightly longer duration for important info
+    });
+
+    // TODO: Implement actual order placement logic.
+    // 1. Save the order details to a database (customer info, items, total price, order status: 'pending payment').
+    // 2. Send an email to the customer with detailed payment instructions for the chosen method (Bank Transfer, Zelle, Crypto).
+    //    This email should specify amounts, account details/wallet addresses, and how to notify the business once payment is made.
+    //
+    // LATER, AFTER MANUAL PAYMENT CONFIRMATION BY THE BUSINESS:
+    // 3. Update the order status to 'paid' in the database.
+    // 4. Generate the official invoice (e.g., using the InvoiceTemplate component with actual order data, possibly converting it to PDF).
+    // 5. Send the invoice (e.g., as a PDF attachment or a secure link) to the customer via email.
+    // 6. Send a copy of the same invoice to combospress@gmail.com for business records.
+    //    Steps 2, 5, and 6 (email sending) require a backend service (e.g., Firebase Functions with an email provider like SendGrid, Resend, or Nodemailer).
+
+    // Clear the cart after successful "order placement"
+    clearCart();
+
+    // Optionally, redirect to an order confirmation page (this page would need to be created)
+    // import { useRouter } from 'next/navigation';
+    // const router = useRouter();
+    // router.push('/order-confirmation?orderId=...');
+  };
 
   if (items.length === 0) {
     return (
@@ -44,7 +80,7 @@ export default function CartPage() {
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="flex justify-between">
-                <span className="text-muted-foreground">Subtotal ({totalItems} items)</span>
+                <span className="text-muted-foreground">Subtotal ({totalItems} {totalItems === 1 ? 'item' : 'items'})</span>
                 <span>${totalPrice.toFixed(2)}</span>
               </div>
               <div className="flex justify-between">
@@ -90,10 +126,14 @@ export default function CartPage() {
               </div>
             </CardContent>
             <CardFooter className="flex flex-col gap-4">
-              <Button size="lg" className="w-full bg-accent text-accent-foreground hover:bg-accent/90">
+              <Button 
+                size="lg" 
+                className="w-full bg-accent text-accent-foreground hover:bg-accent/90"
+                onClick={handleProceedToPayment} // Added onClick handler
+              >
                 Proceder al Pago
               </Button>
-              <Button variant="outline" onClick={clearCart} className="w-full text-destructive border-destructive hover:bg-destructive/10">
+              <Button variant="outline" onClick={clearCart} className="w-full text-destructive border-destructive hover:bg-destructive/10 hover:text-destructive-foreground">
                 Vaciar Carrito
               </Button>
             </CardFooter>
