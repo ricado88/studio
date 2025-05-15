@@ -2,7 +2,7 @@
 "use client";
 
 import Link from 'next/link';
-import { ShoppingCart, Search, Menu, LogInIcon, UserPlusIcon, Facebook, Instagram } from 'lucide-react';
+import { ShoppingCart, Search, Menu, LogInIcon, UserPlusIcon, Facebook, Instagram, Mail, Phone } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useCart } from '@/context/CartContext';
@@ -54,6 +54,9 @@ export default function Header() {
       ariaLabel: "Instagram de ComboExpress88" 
     },
   ];
+
+  const contactEmail = "combospress@gmail.com";
+  const contactPhone = "+5354423736";
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -110,6 +113,17 @@ export default function Header() {
                 {link.icon}
               </a>
             ))}
+             <div className="hidden md:flex items-center gap-1 ml-2 text-xs text-foreground/60">
+                <a href={`mailto:${contactEmail}`} className="hover:text-primary transition-colors flex items-center p-1" title={contactEmail}>
+                    <Mail className="h-4 w-4 mr-1" />
+                    <span>Email</span>
+                </a>
+                <span className="opacity-50 mx-1">|</span>
+                <a href={`tel:${contactPhone}`} className="hover:text-primary transition-colors flex items-center p-1" title={contactPhone}>
+                    <Phone className="h-4 w-4 mr-1" />
+                    <span>Teléfono</span>
+                </a>
+            </div>
           </div>
           
           <Link href="/cart" passHref>
@@ -163,6 +177,18 @@ export default function Header() {
                       ))}
                     </div>
                   </div>
+                  <hr className="my-2"/>
+                  <div className="px-2 py-2">
+                    <p className="text-sm font-medium text-muted-foreground mb-2">Contáctanos:</p>
+                    <a href={`mailto:${contactEmail}`} className="flex items-center text-sm hover:text-primary transition-colors py-1">
+                      <Mail className="mr-2 h-4 w-4" />
+                      {contactEmail}
+                    </a>
+                    <a href={`tel:${contactPhone}`} className="flex items-center text-sm hover:text-primary transition-colors py-1 mt-1">
+                      <Phone className="mr-2 h-4 w-4" />
+                      {contactPhone}
+                    </a>
+                  </div>
                    <form onSubmit={handleSearch} className="flex flex-col gap-2 mt-4">
                     <Input 
                       type="search" 
@@ -182,3 +208,4 @@ export default function Header() {
     </header>
   );
 }
+
