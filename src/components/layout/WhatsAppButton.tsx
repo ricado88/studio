@@ -4,14 +4,12 @@
 import { Button } from "@/components/ui/button";
 import { MessageCircle } from "lucide-react"; // Usaremos MessageCircle como ícono genérico
 
-// IMPORTANTE: Reemplaza estos valores con tu número de WhatsApp y mensaje predeterminado
-const WHATSAPP_PHONE_NUMBER = "521XXXXXXXXXX"; // Ejemplo: 5215512345678 (código de país + código de área + número)
-const WHATSAPP_PREDEFINED_MESSAGE = "Hola, me gustaría obtener más información.";
+// Enlace directo al chat de WhatsApp proporcionado por el usuario
+const WHATSAPP_CHAT_LINK = "https://chat.whatsapp.com/HJE0NbqNWXi5wHgQiKy6dV";
 
 export default function WhatsAppButton() {
   const handleWhatsAppClick = () => {
-    const whatsappUrl = `https://wa.me/${WHATSAPP_PHONE_NUMBER}?text=${encodeURIComponent(WHATSAPP_PREDEFINED_MESSAGE)}`;
-    window.open(whatsappUrl, "_blank", "noopener,noreferrer");
+    window.open(WHATSAPP_CHAT_LINK, "_blank", "noopener,noreferrer");
   };
 
   return (
@@ -26,3 +24,4 @@ export default function WhatsAppButton() {
     </Button>
   );
 }
+
