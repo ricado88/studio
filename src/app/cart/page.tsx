@@ -71,10 +71,11 @@ export default function CartPage() {
                     <Send className="mr-2 h-4 w-4 text-primary" />
                     Zelle (USD)
                   </li>
-                  <li className="flex items-start"> {/* Changed to items-start for multi-line address */}
+                  <li className="flex items-start">
                     <Bitcoin className="mr-2 h-4 w-4 text-primary mt-0.5 flex-shrink-0" />
                     <span>
                       Criptomonedas (USDT, ETH, BTC, etc.)<br />
+                      <span className="text-xs">Red: BSC (BEP20)</span><br />
                       <span className="text-xs break-all">Wallet: 0x7d3a432442Ca595b2Cc3Eb22e24f36833802B067</span>
                     </span>
                   </li>
