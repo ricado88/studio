@@ -1,9 +1,10 @@
 
-import { categories } from '@/data/products';
+import { categories, products as allProducts } from '@/data/products';
 import CategoryCard from '@/components/products/CategoryCard';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import HeroSlider from '@/components/ui/HeroSlider';
+import ProductCarousel from '@/components/ui/ProductCarousel'; // Importar el nuevo carrusel
 
 export default function HomePage() {
   const heroSlides = [
@@ -12,6 +13,9 @@ export default function HomePage() {
     { src: 'https://placehold.co/1200x500.png', alt: 'Nuevos Combos Disponibles', dataAiHint: 'food bundles' },
     { src: 'https://placehold.co/1200x500.png', alt: 'Entrega Rápida y Segura', dataAiHint: 'delivery service' },
   ];
+
+  // Seleccionar algunos productos para el carrusel (ej. los primeros 8)
+  const carouselProducts = allProducts.slice(0, 8);
 
   return (
     <div className="space-y-12">
@@ -41,25 +45,19 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Nueva sección de carrusel de productos */}
+      <ProductCarousel products={carouselProducts} title="Nuestros Productos en Venta" />
+
       <section className="text-center py-12">
          <h2 className="text-3xl font-semibold mb-8">Ofertas Destacadas</h2>
          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {/* Example offer cards */}
+            {/* Oferta que se mantiene */}
             <div className="p-6 border rounded-lg shadow-md bg-card">
                 <h3 className="text-xl font-bold text-primary mb-2">Combo oferta Especial</h3>
                 <p className="text-muted-foreground mb-4">¡Todo lo que necesitas para tu semana con un descuento especial!</p>
                 <Button className="bg-accent text-accent-foreground hover:bg-accent/90">Ver Oferta</Button>
             </div>
-            <div className="p-6 border rounded-lg shadow-md bg-card">
-                <h3 className="text-xl font-bold text-primary mb-2">Descuento en Lácteos</h3>
-                <p className="text-muted-foreground mb-4">15% de descuento en todos nuestros productos lácteos.</p>
-                <Button className="bg-accent text-accent-foreground hover:bg-accent/90">Ver Oferta</Button>
-            </div>
-            <div className="p-6 border rounded-lg shadow-md bg-card">
-                <h3 className="text-xl font-bold text-primary mb-2">Frutas de Temporada</h3>
-                <p className="text-muted-foreground mb-4">Las frutas más frescas y deliciosas de la temporada a precios increíbles.</p>
-                <Button className="bg-accent text-accent-foreground hover:bg-accent/90">Ver Oferta</Button>
-            </div>
+            {/* Las otras dos ofertas han sido eliminadas */}
          </div>
       </section>
     </div>
