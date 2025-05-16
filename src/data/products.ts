@@ -17,7 +17,7 @@ export const products: Product[] = [
     name: 'Combo Familiar',
     description: 'Un surtido completo para toda la familia: carnes variadas, arroz, frijoles, viandas, vegetales y refrescos.',
     price: 49.99,
-    imageUrl: '/images/products/combo-familiar.jpg', // <-- Ejemplo con imagen local
+    imageUrl: 'https://placehold.co/600x400.png', // Revertido a placeholder
     dataAiHint: 'family food hamper',
     category: 'combos',
     stock: 10,
@@ -62,7 +62,7 @@ export const products: Product[] = [
     name: 'Filete de Res Premium (Kg)',
     description: 'Corte de res de primera calidad, tierno y jugoso, ideal para la plancha o parrilla.',
     price: 19.99,
-    imageUrl: '/images/products/filete-res-premium.jpg', // <-- Ejemplo con imagen local
+    imageUrl: 'https://placehold.co/600x400.png', // Revertido a placeholder
     dataAiHint: 'premium beef steak',
     category: 'meats',
     stock: 20,
