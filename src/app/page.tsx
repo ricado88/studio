@@ -46,7 +46,7 @@ export default function HomePage() {
       </section>
 
       {/* Nueva sección de carrusel de productos */}
-      <ProductCarousel products={carouselProducts} title="Nuestros Productos en Venta" />
+      <ProductCarousel products={carouselProducts} title="Nuestros Productos" />
 
       <section className="text-center py-12">
          <h2 className="text-3xl font-semibold mb-8">Ofertas Destacadas</h2>
