@@ -16,6 +16,9 @@ export default function HomePage() {
 
   // Seleccionar algunos productos para el carrusel (ej. los primeros 8)
   const carouselProducts = allProducts.slice(0, 8);
+  // Puedes crear otra lista aquí si quieres productos diferentes para "Ofertas Especiales"
+  // const offerProducts = allProducts.filter(p => p.tags?.includes('offer')).slice(0, 4);
+
 
   return (
     <div className="space-y-12">
@@ -45,20 +48,15 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Nueva sección de carrusel de productos */}
+      
       <ProductCarousel products={carouselProducts} title="Nuestros Productos" />
 
-      <section className="text-center py-12">
-         <h2 className="text-3xl font-semibold mb-8">Ofertas Especiales</h2>
-         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {/* Oferta que se mantiene */}
-            <div className="p-6 border rounded-lg shadow-md bg-card">
-                <h3 className="text-xl font-bold text-primary mb-2">Combo oferta Especial</h3>
-                <p className="text-muted-foreground mb-4">¡Todo lo que necesitas para tu semana con un descuento especial!</p>
-                <Button className="bg-accent text-accent-foreground hover:bg-accent/90">Ver Oferta</Button>
-            </div>
-            {/* Las otras dos ofertas han sido eliminadas */}
-         </div>
+      <section className="py-12"> {/* Removed text-center from section if carousel handles its own title centering */}
+         <h2 className="text-3xl font-semibold mb-8 text-center">Ofertas Especiales</h2>
+         {/* Contenido anterior eliminado y reemplazado por ProductCarousel */}
+         <ProductCarousel products={carouselProducts} /> 
+         {/* Si quieres productos diferentes para ofertas, usa algo como: */}
+         {/* <ProductCarousel products={offerProducts} /> */}
       </section>
     </div>
   );
