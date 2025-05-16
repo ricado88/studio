@@ -57,6 +57,10 @@ export default function ProductCarousel({
     setCurrentIndex((prevIndex) => (prevIndex + 1) % totalPages);
   }, [totalPages]);
 
+  const goToPage = (pageIndex: number) => {
+    setCurrentIndex(pageIndex);
+  };
+
   useEffect(() => {
     if (!autoPlay || products.length === 0 || totalPages <= 1) {
         return;
@@ -125,6 +129,21 @@ export default function ProductCarousel({
           </>
         )}
       </div>
+      {totalPages > 1 && (
+        <div className="flex justify-center mt-6 space-x-2">
+          {Array.from({ length: totalPages }).map((_, index) => (
+            <button
+              key={`dot-${index}`}
+              onClick={() => goToPage(index)}
+              className={cn(
+                "h-2.5 w-2.5 rounded-full transition-all duration-300",
+                currentIndex === index ? "bg-primary w-5" : "bg-muted hover:bg-primary/50"
+              )}
+              aria-label={`Ir a la página ${index + 1}`}
+            />
+          ))}
+        </div>
+      )}
     </section>
   );
 }
