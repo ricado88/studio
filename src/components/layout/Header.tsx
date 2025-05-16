@@ -2,7 +2,7 @@
 "use client";
 
 import Link from 'next/link';
-import { ShoppingCart, Search, Menu, LogInIcon, UserPlusIcon, Facebook, Instagram, Mail, Phone } from 'lucide-react';
+import { ShoppingCart, Search, Menu, LogInIcon, UserPlusIcon, Facebook, Instagram, Mail, Phone, MapPin } from 'lucide-react'; // MapPin añadido
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useCart } from '@/context/CartContext';
@@ -31,6 +31,7 @@ export default function Header() {
   const navLinks = [
     { href: '/', label: 'Inicio' },
     { href: '/products', label: 'Productos' },
+    { href: '/delivery-zones', label: 'Zonas de Entrega', icon: <MapPin className="mr-2 h-4 w-4 inline md:hidden" /> }, // Nuevo enlace
     // { href: '/offers', label: 'Ofertas' }, // Example
     // { href: '/contact', label: 'Contacto' }, // Example
   ];
@@ -44,13 +45,13 @@ export default function Header() {
     { 
       href: "https://www.facebook.com/share/16Ps1cE95j/", 
       label: "Facebook", 
-      icon: <Facebook size={20} />, 
+      icon: <Facebook size={20} className="text-primary" />, 
       ariaLabel: "Facebook de ComboExpress88" 
     },
     { 
       href: "https://www.instagram.com/combospress/profilecard/?igsh=dHYzc2dvY3JpODc5", 
       label: "Instagram", 
-      icon: <Instagram size={20} />, 
+      icon: <Instagram size={20} className="text-primary" />, 
       ariaLabel: "Instagram de ComboExpress88" 
     },
   ];
@@ -108,7 +109,7 @@ export default function Header() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={link.ariaLabel}
-                className="text-primary hover:text-primary/70 transition-colors p-2"
+                className="hover:text-primary/70 transition-colors p-2" 
               >
                 {link.icon}
               </a>
@@ -148,7 +149,8 @@ export default function Header() {
               <SheetContent side="right" className="w-[280px] sm:w-[320px]">
                 <nav className="flex flex-col gap-3 mt-8">
                   {navLinks.map(link => (
-                    <Link key={`mobile-${link.href}`} href={link.href} className="text-base font-medium hover:text-primary transition-colors py-2 px-2 rounded-md hover:bg-muted">
+                    <Link key={`mobile-${link.href}`} href={link.href} className="text-base font-medium hover:text-primary transition-colors py-2 px-2 rounded-md hover:bg-muted flex items-center">
+                      {link.icon && <span className="mr-2">{link.icon}</span>}
                       {link.label}
                     </Link>
                   ))}
@@ -170,7 +172,7 @@ export default function Header() {
                           target="_blank"
                           rel="noopener noreferrer"
                           aria-label={link.ariaLabel}
-                          className="text-primary hover:text-primary/70 transition-colors"
+                          className="hover:text-primary/70 transition-colors" // Color ya aplicado al icono
                         >
                           {link.icon}
                         </a>
@@ -189,7 +191,7 @@ export default function Header() {
                       {contactPhone}
                     </a>
                   </div>
-                   <form onSubmit={handleSearch} className="flex flex-col gap-2 mt-4">
+                   <form onSubmit={handleSearch} className="flex flex-col gap-2 mt-4 px-2">
                     <Input 
                       type="search" 
                       placeholder="Buscar productos..." 
