@@ -7,7 +7,8 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { useCart } from '@/context/CartContext';
-import { ShoppingCart } from 'lucide-react';
+import { useWishlist } from '@/context/WishlistContext'; // Import useWishlist
+import { ShoppingCart, Heart } from 'lucide-react';
 
 interface ProductCardProps {
   product: Product;
@@ -15,10 +16,19 @@ interface ProductCardProps {
 
 export default function ProductCard({ product }: ProductCardProps) {
   const { addToCart } = useCart();
+  const { toggleWishlist, isProductInWishlist } = useWishlist(); // Use wishlist context
+
+  const handleWishlistToggle = (e: React.MouseEvent) => {
+    e.preventDefault(); // Prevent link navigation if heart is on top of link area
+    e.stopPropagation();
+    toggleWishlist(product.id, product.name);
+  };
+
+  const productIsFavorite = isProductInWishlist(product.id);
 
   return (
     <Card className="flex flex-col overflow-hidden h-full group transition-all duration-300 ease-in-out hover:shadow-xl">
-      <CardHeader className="p-0">
+      <CardHeader className="p-0 relative"> {/* Added relative for heart positioning */}
         <Link href={`/products/${product.id}`} className="block">
           <div className="aspect-square relative overflow-hidden">
             <Image
@@ -31,6 +41,16 @@ export default function ProductCard({ product }: ProductCardProps) {
             />
           </div>
         </Link>
+        <Button
+            variant="ghost"
+            size="icon"
+            className={`absolute top-2 right-2 h-9 w-9 rounded-full bg-background/70 hover:bg-background/90 z-10 ${productIsFavorite ? 'text-red-500' : 'text-muted-foreground hover:text-red-400'}`}
+            onClick={handleWishlistToggle}
+            aria-label={productIsFavorite ? "Quitar de favoritos" : "Añadir a favoritos"}
+            title={productIsFavorite ? "Quitar de favoritos" : "Añadir a favoritos"}
+        >
+            <Heart className={`h-5 w-5 transition-colors duration-200 ${productIsFavorite ? 'fill-red-500' : 'fill-transparent'}`} />
+        </Button>
       </CardHeader>
       <CardContent className="p-4 flex-grow">
         <Link href={`/products/${product.id}`} className="block">

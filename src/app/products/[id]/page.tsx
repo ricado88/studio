@@ -8,7 +8,8 @@ import { products as allProducts } from '@/data/products';
 import type { Product } from '@/types';
 import { Button } from '@/components/ui/button';
 import { useCart } from '@/context/CartContext';
-import { ChevronLeft, ShoppingCart, Star } from 'lucide-react';
+import { useWishlist } from '@/context/WishlistContext'; // Import useWishlist
+import { ChevronLeft, ShoppingCart, Star, Heart } from 'lucide-react'; // Added Heart
 import Link from 'next/link';
 import ProductRecommendations from '@/components/ai/ProductRecommendations';
 import { Badge } from '@/components/ui/badge';
@@ -19,6 +20,7 @@ const MAX_HISTORY_ITEMS = 10;
 export default function ProductDetailPage() {
   const params = useParams();
   const { addToCart } = useCart();
+  const { toggleWishlist, isProductInWishlist } = useWishlist(); // Use wishlist context
   const [product, setProduct] = useState<Product | null>(null);
   const [quantity, setQuantity] = useState(1);
   const [viewHistoryTrigger, setViewHistoryTrigger] = useState<string[]>([]);
@@ -30,7 +32,6 @@ export default function ProductDetailPage() {
       const foundProduct = allProducts.find(p => p.id === productId);
       setProduct(foundProduct || null);
 
-      // Update viewing history
       const storedHistory = localStorage.getItem(VIEWING_HISTORY_KEY);
       let historyArray: string[] = [];
       if (storedHistory) {
@@ -39,20 +40,18 @@ export default function ProductDetailPage() {
           if (Array.isArray(parsed)) {
             historyArray = parsed;
           } else {
-            // If not an array, it's corrupted. Clear it.
             console.warn('Viewing history in localStorage (ProductDetailPage) was malformed. Resetting.');
             localStorage.removeItem(VIEWING_HISTORY_KEY);
           }
         } catch (e) { 
           console.error("Error parsing viewing history from localStorage (ProductDetailPage):", e);
-          localStorage.removeItem(VIEWING_HISTORY_KEY); // Clear if parsing fails
+          localStorage.removeItem(VIEWING_HISTORY_KEY); 
         }
       }
       
-      // Add current product to the beginning, remove duplicates, limit size
       const newHistory = [productId, ...historyArray.filter(id => id !== productId)].slice(0, MAX_HISTORY_ITEMS);
       localStorage.setItem(VIEWING_HISTORY_KEY, JSON.stringify(newHistory));
-      setViewHistoryTrigger([productId]); // Trigger AI component update
+      setViewHistoryTrigger([productId]); 
     }
   }, [productId]);
 
@@ -72,6 +71,12 @@ export default function ProductDetailPage() {
   const handleAddToCart = () => {
     addToCart(product, quantity);
   };
+
+  const handleWishlistToggle = () => {
+    toggleWishlist(product.id, product.name);
+  };
+
+  const productIsFavorite = isProductInWishlist(product.id);
 
   return (
     <div className="container mx-auto py-8 px-4">
@@ -93,7 +98,20 @@ export default function ProductDetailPage() {
           />
         </div>
         <div className="space-y-6">
-          <h1 className="text-3xl lg:text-4xl font-bold text-primary">{product.name}</h1>
+          <div className="flex items-start justify-between">
+            <h1 className="text-3xl lg:text-4xl font-bold text-primary flex-grow pr-4">{product.name}</h1>
+            <Button
+                variant="ghost"
+                size="icon"
+                className={`h-10 w-10 rounded-full flex-shrink-0 ${productIsFavorite ? 'text-red-500' : 'text-muted-foreground hover:text-red-400'}`}
+                onClick={handleWishlistToggle}
+                aria-label={productIsFavorite ? "Quitar de favoritos" : "Añadir a favoritos"}
+                title={productIsFavorite ? "Quitar de favoritos" : "Añadir a favoritos"}
+            >
+                <Heart className={`h-6 w-6 transition-colors duration-200 ${productIsFavorite ? 'fill-red-500' : 'fill-transparent'}`} />
+            </Button>
+          </div>
+
           {product.tags && product.tags.length > 0 && (
             <div className="flex flex-wrap gap-2">
               {product.tags.map(tag => (
