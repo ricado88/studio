@@ -8,10 +8,10 @@ import ProductCarousel from '@/components/ui/ProductCarousel'; // Importar el nu
 
 export default function HomePage() {
   const heroSlides = [
-    { 
-      src: '/images/combo-express-principal.png', 
-      alt: 'Surtido de productos de primera necesidad y alimentos variados', 
-      dataAiHint: 'grocery items' 
+    {
+      src: 'https://i.imgur.com/1sKzNBI.jpeg', // Temporarily changed from /images/combo-express-principal.png
+      alt: 'Surtido de productos de primera necesidad y alimentos variados (VERIFICAR IMAGEN LOCAL)',
+      dataAiHint: 'grocery items'
     },
     { src: 'https://i.imgur.com/1sKzNBI.jpeg', alt: 'La Frescura del Campo a Tu Mesa', dataAiHint: 'farm fresh' },
     { src: 'https://i.imgur.com/G4iaCqs.jpeg', alt: 'Combos Pensados Para Ti y Tu Familia', dataAiHint: 'family meal' },
@@ -52,13 +52,13 @@ export default function HomePage() {
         </div>
       </section>
 
-      
+
       <ProductCarousel products={carouselProducts} title="Nuestros Productos" />
 
       <section className="py-12"> {/* Removed text-center from section if carousel handles its own title centering */}
          <h2 className="text-3xl font-semibold mb-8 text-center">Ofertas Especiales</h2>
          {/* Contenido anterior eliminado y reemplazado por ProductCarousel */}
-         <ProductCarousel products={carouselProducts} /> 
+         <ProductCarousel products={carouselProducts} />
          {/* Si quieres productos diferentes para ofertas, usa algo como: */}
          {/* <ProductCarousel products={offerProducts} /> */}
       </section>
