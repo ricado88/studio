@@ -13,7 +13,7 @@ export default function HomePage() {
     <>
       {/* Hero Section - Full Width */}
       <section
-        className="relative w-screen left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] aspect-[16/7] md:aspect-[16/6] lg:aspect-[16/5] overflow-hidden"
+        className="relative w-screen left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] aspect-[2/1] md:aspect-[16/6] lg:aspect-[16/5] overflow-hidden"
       >
         <Image
           src="https://i.imgur.com/1sKzNBI.jpeg"
@@ -25,15 +25,15 @@ export default function HomePage() {
           data-ai-hint="grocery items"
         />
         {/* Overlay Content */}
-        <div className="absolute inset-0 flex flex-col items-center justify-center text-center bg-black/50 p-2 sm:p-4 z-10">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-2 sm:mb-3 drop-shadow-lg">
+        <div className="absolute inset-0 flex flex-col items-center justify-center text-center bg-black/50 p-2 sm:p-4 z-10 pointer-events-none">
+            <h1 className="text-2xl sm:text-4xl md:text-5xl font-bold text-white mb-1 sm:mb-3 drop-shadow-lg">
               Bienvenido a ComboExpress88
             </h1>
-            <p className="text-base sm:text-lg text-white/90 mb-4 sm:mb-6 max-w-md sm:max-w-2xl mx-auto drop-shadow-md">
+            <p className="text-sm sm:text-lg text-white/90 mb-3 sm:mb-6 max-w-md sm:max-w-2xl mx-auto drop-shadow-md">
               Tu supermercado online con los mejores productos frescos, combos y más. ¡Directo a tu puerta!
             </p>
             <Link href="/products" passHref className="pointer-events-auto">
-              <Button size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90 text-base sm:text-lg">
+              <Button size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90 text-sm sm:text-lg">
                 Ver Todos los Productos
               </Button>
             </Link>
