@@ -13,9 +13,9 @@ export default function HomePage() {
       alt: 'Surtido de productos de primera necesidad y alimentos variados', 
       dataAiHint: 'grocery items' 
     },
-    { src: 'https://placehold.co/1200x500.png', alt: 'La Frescura del Campo a Tu Mesa', dataAiHint: 'farm fresh' },
-    { src: 'https://placehold.co/1200x500.png', alt: 'Combos Pensados Para Ti y Tu Familia', dataAiHint: 'family meal' },
-    { src: 'https://placehold.co/1200x500.png', alt: 'Compra Fácil y Rápido Desde Casa', dataAiHint: 'online shopping' },
+    { src: 'https://i.imgur.com/1sKzNBI.jpeg', alt: 'La Frescura del Campo a Tu Mesa', dataAiHint: 'farm fresh' },
+    { src: 'https://i.imgur.com/G4iaCqs.jpeg', alt: 'Combos Pensados Para Ti y Tu Familia', dataAiHint: 'family meal' },
+    { src: 'https://i.imgur.com/EOt6GwL.jpeg', alt: 'Compra Fácil y Rápido Desde Casa', dataAiHint: 'online shopping' },
   ];
 
   // Seleccionar algunos productos para el carrusel (ej. los primeros 8)
