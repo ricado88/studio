@@ -46,7 +46,7 @@ export default function HomePage() {
          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {/* Example offer cards */}
             <div className="p-6 border rounded-lg shadow-md bg-card">
-                <h3 className="text-xl font-bold text-primary mb-2">Combo Ahorro Semanal</h3>
+                <h3 className="text-xl font-bold text-primary mb-2">Combo oferta Especial</h3>
                 <p className="text-muted-foreground mb-4">¡Todo lo que necesitas para tu semana con un descuento especial!</p>
                 <Button className="bg-accent text-accent-foreground hover:bg-accent/90">Ver Oferta</Button>
             </div>
