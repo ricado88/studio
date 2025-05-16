@@ -18,8 +18,9 @@ export default function CategoryCard({ category }: CategoryCardProps) {
               <Image 
                 src={category.imageUrl} 
                 alt={category.name} 
-                layout="fill" 
-                objectFit="contain"
+                fill
+                sizes="96px" // Added sizes attribute for optimization with fill
+                className="object-contain" // Replaced layout="fill" objectFit="contain"
                 data-ai-hint={category.imageHint || 'category item'}
               />
             </div>
