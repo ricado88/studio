@@ -3,23 +3,18 @@ import { categories, products as allProducts } from '@/data/products';
 import CategoryCard from '@/components/products/CategoryCard';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import Image from 'next/image'; // Importar Image de next/image
-import ProductCarousel from '@/components/ui/ProductCarousel'; // Importar el nuevo carrusel
+import Image from 'next/image';
+import ProductCarousel from '@/components/ui/ProductCarousel';
 
 export default function HomePage() {
-  // Ya no necesitamos heroSlides para un carrusel
-  // const heroSlides = [ ... ];
-
-  // Seleccionar algunos productos para el carrusel (ej. los primeros 8)
   const carouselProducts = allProducts.slice(0, 8);
-  // Puedes crear otra lista aquí si quieres productos diferentes para "Ofertas Especiales"
-  // const offerProducts = allProducts.filter(p => p.tags?.includes('offer')).slice(0, 4);
-
 
   return (
-    <div className="space-y-12">
-      <section className="relative rounded-lg overflow-hidden aspect-[16/7] md:aspect-[16/6] lg:aspect-[16/5]">
-        {/* Imagen de fondo estática */}
+    <>
+      {/* Hero Section - Full Width */}
+      <section 
+        className="relative w-screen left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] aspect-[16/7] md:aspect-[16/6] lg:aspect-[16/5] overflow-hidden"
+      >
         <Image
           src="https://i.imgur.com/1sKzNBI.jpeg"
           alt="Surtido de productos de primera necesidad y alimentos variados"
@@ -29,7 +24,7 @@ export default function HomePage() {
           className="z-0"
           data-ai-hint="grocery items"
         />
-        {/* Contenido superpuesto */}
+        {/* Overlay Content */}
         <div className="absolute inset-0 flex flex-col items-center justify-center text-center bg-black/50 p-4 z-10">
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-3 sm:mb-4 drop-shadow-lg">
               Bienvenido a ComboExpress88
@@ -45,22 +40,24 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section>
-        <h2 className="text-3xl font-semibold mb-8 text-center">Nuestras Categorías</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
-          {categories.map((category) => (
-            <CategoryCard key={category.id} category={category} />
-          ))}
-        </div>
-      </section>
+      {/* Rest of the page content - centered */}
+      <div className="mt-12 space-y-12"> {/* Added mt-12 for spacing below full-width hero */}
+        <section>
+          <h2 className="text-3xl font-semibold mb-8 text-center">Nuestras Categorías</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+            {categories.map((category) => (
+              <CategoryCard key={category.id} category={category} />
+            ))}
+          </div>
+        </section>
 
+        <ProductCarousel products={carouselProducts} title="Nuestros Productos" />
 
-      <ProductCarousel products={carouselProducts} title="Nuestros Productos" />
-
-      <section className="py-12">
-         <h2 className="text-3xl font-semibold mb-8 text-center">Ofertas Especiales</h2>
-         <ProductCarousel products={carouselProducts} />
-      </section>
-    </div>
+        <section className="py-12">
+           <h2 className="text-3xl font-semibold mb-8 text-center">Ofertas Especiales</h2>
+           <ProductCarousel products={carouselProducts} />
+        </section>
+      </div>
+    </>
   );
 }
