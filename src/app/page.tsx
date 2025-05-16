@@ -49,7 +49,7 @@ export default function HomePage() {
       <ProductCarousel products={carouselProducts} title="Nuestros Productos" />
 
       <section className="text-center py-12">
-         <h2 className="text-3xl font-semibold mb-8">Ofertas Destacadas</h2>
+         <h2 className="text-3xl font-semibold mb-8">Ofertas Especiales</h2>
          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {/* Oferta que se mantiene */}
             <div className="p-6 border rounded-lg shadow-md bg-card">
