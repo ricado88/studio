@@ -9,7 +9,7 @@ import ProductCarousel from '@/components/ui/ProductCarousel'; // Importar el nu
 export default function HomePage() {
   const heroSlides = [
     {
-      src: 'https://i.imgur.com/1sKzNBI.jpeg', 
+      src: 'https://i.imgur.com/1sKzNBI.jpeg', // Usando la imagen de Imgur que ya está configurada
       alt: 'Surtido de productos de primera necesidad y alimentos variados',
       dataAiHint: 'grocery items'
     },
@@ -27,8 +27,8 @@ export default function HomePage() {
   return (
     <div className="space-y-12">
       <section className="relative rounded-lg overflow-hidden">
-        <HeroSlider slides={heroSlides} autoPlayInterval={8000} />
-        <div className="absolute inset-0 flex flex-col items-center justify-center text-center bg-black/40 p-4 pointer-events-none">
+        <HeroSlider slides={heroSlides} autoPlayInterval={10000} />
+        <div className="absolute inset-0 flex flex-col items-center justify-center text-center bg-black/50 p-4 pointer-events-none">
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-3 sm:mb-4 drop-shadow-lg">
               Bienvenido a ComboExpress88
             </h1>
