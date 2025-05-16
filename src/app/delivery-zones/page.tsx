@@ -1,19 +1,23 @@
 
-import { MapPin, Building, Info } from 'lucide-react';
+import { MapPin, Building, Info, PackageCheck } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
 export default function DeliveryZonesPage() {
-  // Puedes reemplazar esta información con tus datos reales
-  const deliveryAreas = [
-    { name: "Centro Ciudad", details: "Entrega en 24-48 horas. Costo: $5.00" },
-    { name: "Zona Residencial Norte", details: "Entrega en 48-72 horas. Costo: $7.50" },
-    { name: "Área Industrial Sur", details: "Consultar disponibilidad y costos." },
+  const mainDeliveryArea = {
+    province: "Holguín",
+    municipality: "Holguín",
+    details: "Entregas a domicilio disponibles en toda la ciudad de Holguín y áreas cercanas dentro del municipio. ¡Llevamos tu pedido directamente a tu puerta!",
+    cost: "Varía según la distancia. Se confirmará al procesar el pedido."
+  };
+
+  const otherDeliveryAreas = [
+    { name: "Repartos Especiales Fuera del Municipio", details: "Para entregas fuera del municipio de Holguín, por favor contáctanos para consultar disponibilidad y costos adicionales." },
   ];
 
   const pickupPoints = [
-    { name: "Tienda Principal", address: "Calle Falsa 123, Centro", hours: "L-V: 9am - 6pm, S: 10am - 2pm" },
-    { name: "Almacén Secundario", address: "Avenida Siempreviva 742, Zona Norte", hours: "Solo con cita previa" },
+    { name: "Punto de Recogida Central (Holguín)", address: "Calle Falsa 123, Centro, Holguín", hours: "L-V: 9am - 6pm, S: 10am - 2pm (Confirmar cita previa)" },
+    // Puedes añadir más puntos de recogida si los tienes
   ];
 
   return (
@@ -22,8 +26,30 @@ export default function DeliveryZonesPage() {
         <MapPin className="mx-auto h-16 w-16 text-primary mb-4" />
         <h1 className="text-4xl font-bold text-primary mb-3">Nuestras Zonas de Entrega</h1>
         <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-          Consulta aquí la información sobre dónde podemos llevar tus pedidos o dónde puedes recogerlos.
+          ¡Entregamos tus combos y productos directamente en {mainDeliveryArea.municipality}, Provincia {mainDeliveryArea.province}!
         </p>
+      </section>
+
+      <section>
+        <Card className="border-primary shadow-lg">
+          <CardHeader>
+            <CardTitle className="text-2xl flex items-center text-primary">
+              <PackageCheck className="mr-3 h-7 w-7" />
+              Entrega Principal: {mainDeliveryArea.municipality}, {mainDeliveryArea.province}
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-3">
+            <p className="text-lg text-foreground">{mainDeliveryArea.details}</p>
+            <p className="font-medium">Costo de entrega: <span className="text-muted-foreground">{mainDeliveryArea.cost}</span></p>
+            <Alert variant="default" className="bg-primary/10 border-primary/30">
+              <Info className="h-5 w-5 text-primary" />
+              <AlertTitle className="text-primary font-semibold">¡Servicio Confiable!</AlertTitle>
+              <AlertDescription className="text-foreground/80">
+                Nos esforzamos por llevar tus productos de forma rápida y segura a tu hogar en Holguín.
+              </AlertDescription>
+            </Alert>
+          </CardContent>
+        </Card>
       </section>
 
       <section>
@@ -31,11 +57,11 @@ export default function DeliveryZonesPage() {
           <CardHeader>
             <CardTitle className="text-2xl flex items-center">
               <MapPin className="mr-3 h-6 w-6 text-accent" />
-              Áreas de Entrega a Domicilio
+              Otras Áreas y Consideraciones
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
-            {deliveryAreas.map((area, index) => (
+            {otherDeliveryAreas.map((area, index) => (
               <div key={index} className="p-4 border rounded-lg bg-background shadow-sm">
                 <h3 className="font-semibold text-lg text-primary">{area.name}</h3>
                 <p className="text-muted-foreground">{area.details}</p>
@@ -58,7 +84,7 @@ export default function DeliveryZonesPage() {
           <CardHeader>
             <CardTitle className="text-2xl flex items-center">
               <Building className="mr-3 h-6 w-6 text-accent" />
-              Puntos de Recogida
+              Puntos de Recogida Disponibles
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
