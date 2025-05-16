@@ -8,10 +8,10 @@ import ProductCarousel from '@/components/ui/ProductCarousel'; // Importar el nu
 
 export default function HomePage() {
   const heroSlides = [
-    { src: 'https://placehold.co/1200x500.png', alt: 'Promoción Especial Supermercado', dataAiHint: 'grocery sale' },
-    { src: 'https://placehold.co/1200x500.png', alt: 'Productos Frescos de Temporada', dataAiHint: 'fresh produce' },
-    { src: 'https://placehold.co/1200x500.png', alt: 'Nuevos Combos Disponibles', dataAiHint: 'food bundles' },
-    { src: 'https://placehold.co/1200x500.png', alt: 'Entrega Rápida y Segura', dataAiHint: 'delivery service' },
+    { src: 'https://placehold.co/1200x500.png', alt: 'Ofertas Increíbles Cada Semana', dataAiHint: 'weekly deals' },
+    { src: 'https://placehold.co/1200x500.png', alt: 'La Frescura del Campo a Tu Mesa', dataAiHint: 'farm fresh' },
+    { src: 'https://placehold.co/1200x500.png', alt: 'Combos Pensados Para Ti y Tu Familia', dataAiHint: 'family meal' },
+    { src: 'https://placehold.co/1200x500.png', alt: 'Compra Fácil y Rápido Desde Casa', dataAiHint: 'online shopping' },
   ];
 
   // Seleccionar algunos productos para el carrusel (ej. los primeros 8)
