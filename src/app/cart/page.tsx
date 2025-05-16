@@ -56,13 +56,14 @@ export default function CartPage() {
       return;
     }
 
+    const selectedMethodDetails = paymentMethods.find(pm => pm.id === selectedPaymentMethod)?.name || 'Método no especificado';
     console.log('Order placed with items:', items);
     console.log('Total amount:', totalPrice.toFixed(2));
-    console.log('Selected payment method:', selectedPaymentMethod);
+    console.log('Selected payment method:', selectedPaymentMethod, `(${selectedMethodDetails})`);
 
     toast({
       title: '¡Pedido Realizado con Éxito!',
-      description: `Has seleccionado ${paymentMethods.find(pm => pm.id === selectedPaymentMethod)?.name}. Revisa tu correo para las instrucciones de pago. Una vez confirmado el pago, recibirás tu factura.`,
+      description: `Has seleccionado ${selectedMethodDetails}. Revisa tu correo para las instrucciones de pago. Una vez confirmado el pago, recibirás tu factura.`,
       duration: 6000,
     });
 
@@ -112,7 +113,7 @@ export default function CartPage() {
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="flex justify-between">
-                <span className="text-muted-foreground">Subtotal ({totalItems} {totalItems === 1 ? 'item' : 'items'})</span>
+                <span className="text-muted-foreground">Subtotal de Productos ({totalItems} {totalItems === 1 ? 'unidad' : 'unidades'})</span>
                 <span>${totalPrice.toFixed(2)}</span>
               </div>
               <div className="flex justify-between">
