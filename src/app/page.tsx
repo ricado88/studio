@@ -21,8 +21,8 @@ export default function HomePage() {
           fill
           priority
           className="z-0 object-cover"
-          data-ai-hint="grocery items"
           sizes="100vw"
+          data-ai-hint="grocery items"
         />
         {/* Overlay Content */}
         <div className="absolute inset-0 flex flex-col items-center justify-center text-center bg-black/50 p-2 sm:p-4 z-10 pointer-events-none">
@@ -41,7 +41,7 @@ export default function HomePage() {
       </section>
 
       {/* Rest of the page content - centered */}
-      <div className="mt-12 space-y-12"> {/* Added mt-12 for spacing below full-width hero */}
+      <div className="mt-12 space-y-12">
         <section>
           <h2 className="text-3xl font-semibold mb-8 text-center">Nuestras Categorías</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
