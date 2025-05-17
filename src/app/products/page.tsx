@@ -14,11 +14,11 @@ export default function ProductsPage() {
         <Image
           src="https://placehold.co/1200x300.png"
           alt="Variedad de productos disponibles"
-          layout="fill"
-          objectFit="cover"
+          fill
           priority
-          className="z-0"
+          className="z-0 object-cover"
           data-ai-hint="product assortment"
+          sizes="100vw"
         />
         {/* Overlay Content */}
         <div className="absolute inset-0 flex flex-col items-center justify-center text-center bg-black/50 p-4 z-10">

@@ -47,11 +47,11 @@ export default function RegisterPage() {
         <Image
           src="https://placehold.co/1200x300.png"
           alt="Formulario de registro de nuevos usuarios"
-          layout="fill"
-          objectFit="cover"
+          fill
           priority
-          className="z-0"
+          className="z-0 object-cover"
           data-ai-hint="user registration"
+          sizes="100vw"
         />
         {/* Overlay Content */}
         <div className="absolute inset-0 flex flex-col items-center justify-center text-center bg-black/50 p-4 z-10">

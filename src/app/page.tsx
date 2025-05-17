@@ -18,11 +18,11 @@ export default function HomePage() {
         <Image
           src="https://i.imgur.com/1sKzNBI.jpeg"
           alt="Surtido de productos de primera necesidad y alimentos variados"
-          layout="fill"
-          objectFit="cover"
+          fill
           priority
-          className="z-0"
+          className="z-0 object-cover"
           data-ai-hint="grocery items"
+          sizes="100vw"
         />
         {/* Overlay Content */}
         <div className="absolute inset-0 flex flex-col items-center justify-center text-center bg-black/50 p-2 sm:p-4 z-10 pointer-events-none">

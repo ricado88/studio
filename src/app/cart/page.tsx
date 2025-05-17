@@ -30,7 +30,7 @@ export default function CartPage() {
     {
       id: "zelle",
       name: "Zelle (USD)",
-      icon: <Send className="mr-2 h-5 w-5 text-primary" />, // Corrected icon
+      icon: <Send className="mr-2 h-5 w-5 text-primary" />, 
       details: null,
     },
     {
@@ -68,14 +68,14 @@ export default function CartPage() {
       duration: 6000,
     });
 
-    // TODO: Implement actual order placement logic based on selectedPaymentMethod.
+    // TODO: Implement actual order placement logic. This is a placeholder.
     // 1. Save the order details to a database (customer info, items, total price, order status: 'pending payment', selectedPaymentMethod).
     // 2. Send an email to the customer with detailed payment instructions for THE CHOSEN METHOD.
     //    This email should specify amounts, account details/wallet addresses, and how to notify the business once payment is made.
     //
     // LATER, AFTER MANUAL PAYMENT CONFIRMATION BY THE BUSINESS:
     // 3. Update the order status to 'paid' in the database.
-    // 4. Generate the official invoice.
+    // 4. Generate the official invoice (potentially using a service or library).
     // 5. Send the invoice to the customer via email.
     // 6. Send a copy of the same invoice to combospress@gmail.com for business records.
 
@@ -92,11 +92,11 @@ export default function CartPage() {
         <Image
           src="https://placehold.co/1200x300.png"
           alt="Carrito de compras con productos"
-          layout="fill"
-          objectFit="cover"
+          fill
           priority
-          className="z-0"
+          className="z-0 object-cover"
           data-ai-hint="shopping items"
+          sizes="100vw"
         />
         {/* Overlay Content */}
         <div className="absolute inset-0 flex flex-col items-center justify-center text-center bg-black/50 p-4 z-10">
