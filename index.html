@@ -3,257 +3,364 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Plan de Proyecto Study IA</title>
+    <title>TU IA DE ESTUDIO</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
         :root {
-            --color-background: #E0E5EC;
-            --color-text: #555;
-            --color-primary: #6D55FF; /* A vibrant purple */
-            --color-primary-light: #A599FF;
-            --color-primary-dark: #4A3AFF;
-            --color-accent: #FFAB76; /* A warm accent */
-            --color-success: #3DDC97;
-            --color-error: #FF6B6B;
-
-            --neumorphism-light-shadow: -9px -9px 16px #ffffff, 9px 9px 16px #a3b1c6;
-            --neumorphism-light-shadow-inset: inset -7px -7px 14px #ffffff, inset 7px 7px 14px #a3b1c6;
-            
-            /* Dark mode would have different shadow values if implemented */
-            /* --neumorphism-dark-shadow: -9px -9px 16px #2c2f33, 9px 9px 16px #1a1c1e; */
-            /* --neumorphism-dark-shadow-inset: inset -7px -7px 14px #2c2f33, inset 7px 7px 14px #1a1c1e; */
-
-            --current-shadow: var(--neumorphism-light-shadow);
-            --current-shadow-inset: var(--neumorphism-light-shadow-inset);
+            /* Flat, Modern Palette */
+            --color-background: #f8f9fa; /* Very light gray, almost white */
+            --color-surface: #ffffff;    /* For cards, header, modals etc. */
+            --color-text: #212529;       /* Dark gray for body text */
+            --color-text-muted: #6c757d; /* Lighter gray for subtitles, placeholders */
+            --color-primary: #007bff;    /* Standard Bootstrap Blue */
+            --color-primary-light: #5dade2; 
+            --color-primary-dark: #0056b3;  
+            --color-accent: #6c757d;     /* A secondary/accent gray */
+            --color-success: #28a745;
+            --color-error: #dc3545;
+            --color-border: #dee2e6;     
             
             --font-main: 'Poppins', sans-serif;
+            --color-primary-rgb: 0, 123, 255; 
+            --color-accent-rgb: 108, 117, 125; 
+
+            /* Neumorphic variables (kept for specific elements if needed) */
+            --neumorphism-bg: #E0E5EC;
+            --neumorphism-light-shadow: -9px -9px 16px #ffffff, 9px 9px 16px #a3b1c6;
+            --neumorphism-light-shadow-inset: inset -7px -7px 14px #ffffff, inset 7px 7px 14px #a3b1c6;
         }
 
         body {
             font-family: var(--font-main);
             background-color: var(--color-background);
             color: var(--color-text);
-            line-height: 1.7;
+            line-height: 1.6; 
             margin: 0;
             padding: 0;
             transition: background-color 0.3s, color 0.3s;
-            overflow-x: hidden; /* Prevent horizontal scroll */
+            overflow-x: hidden; 
         }
 
-        /* Neumorphic Card */
-        .neumorphic-card {
-            background-color: var(--color-background);
-            border-radius: 25px; /* Slightly more rounded */
-            padding: clamp(1.5rem, 5vw, 2.5rem); /* Responsive padding */
-            box-shadow: var(--current-shadow);
+        .card-base {
+            background-color: var(--color-surface);
+            border-radius: 12px; 
+            padding: clamp(1.5rem, 4vw, 2rem);
+            transition: box-shadow 0.2s ease-in-out, transform 0.2s ease-in-out;
+        }
+        
+        .neumorphic-card { 
+            background-color: var(--neumorphism-bg);
+            border-radius: 25px; 
+            padding: clamp(1.5rem, 5vw, 2.5rem); 
+            box-shadow: var(--neumorphism-light-shadow);
             transition: box-shadow 0.25s ease-in-out;
         }
         .neumorphic-card:hover {
-            box-shadow: -6px -6px 12px #ffffff, 6px 6px 12px #a3b1c6;
+            box-shadow: -6px -6px 12px #ffffff, 6px 6px 12px #a3b1c6; 
+        }
+        
+        .flat-card { 
+             box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+        .flat-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.1);
         }
 
-        /* Neumorphic Button */
-        .neumorphic-button {
-            background-color: var(--color-background);
+        .button-base {
             border: none;
-            border-radius: 15px;
-            padding: 0.8rem 1.8rem;
+            border-radius: 8px;
+            padding: 0.75rem 1.5rem;
             font-weight: 600;
-            color: var(--color-primary);
-            box-shadow: var(--current-shadow);
-            transition: all 0.15s ease-in-out;
+            transition: all 0.2s ease-in-out;
             cursor: pointer;
             outline: none;
             text-align: center;
         }
+
+        .neumorphic-button { 
+            background-color: var(--neumorphism-bg);
+            border-radius: 15px;
+            padding: 0.8rem 1.8rem;
+            font-weight: 600;
+            color: var(--color-primary); 
+            box-shadow: var(--neumorphism-light-shadow);
+        }
         .neumorphic-button:hover {
-            color: var(--color-primary-dark);
-            box-shadow: -6px -6px 12px #ffffff, 6px 6px 12px #a3b1c6;
+            color: var(--color-primary-dark); 
+            box-shadow: -6px -6px 12px #ffffff, 6px 6px 12px #a3b1c6; 
         }
         .neumorphic-button:active {
-            box-shadow: var(--current-shadow-inset);
-            color: var(--color-primary-light);
-            transform: translateY(1px); /* Slight press effect */
+            box-shadow: var(--neumorphism-light-shadow-inset);
+            color: var(--color-primary-light); 
+            transform: translateY(1px); 
         }
-        .neumorphic-button-primary {
+        .neumorphic-button-primary { 
             color: white;
             background-color: var(--color-primary);
         }
         .neumorphic-button-primary:hover {
             background-color: var(--color-primary-dark);
-            color: white; /* Ensure text remains white */
+            color: white; 
         }
         .neumorphic-button-primary:active {
              background-color: var(--color-primary-light);
-             color: white; /* Ensure text remains white */
+             color: white; 
         }
         .neumorphic-button.disabled, .neumorphic-button:disabled {
             opacity: 0.7;
-            box-shadow: var(--current-shadow-inset); /* Make it look pressed / inactive */
+            box-shadow: var(--neumorphism-light-shadow-inset); 
             cursor: not-allowed;
         }
 
+        .flat-button { 
+            color: var(--color-primary);
+            background-color: transparent;
+            border: 1px solid var(--color-primary);
+        }
+        .flat-button:hover {
+            background-color: var(--color-primary);
+            color: var(--color-surface);
+        }
+        .flat-button-primary { 
+            background-color: var(--color-primary);
+            color: var(--color-surface);
+            border: 1px solid var(--color-primary);
+        }
+        .flat-button-primary:hover {
+            background-color: var(--color-primary-dark);
+            border-color: var(--color-primary-dark);
+        }
+        .flat-button.disabled, .flat-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            background-color: var(--color-text-muted);
+            border-color: var(--color-text-muted);
+            color: var(--color-surface);
+        }
 
-        /* Neumorphic Input */
+        .input-base {
+            border: 1px solid var(--color-border); 
+            border-radius: 8px;
+            padding: 0.75rem 1.2rem;
+            color: var(--color-text);
+            width: 100%;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+            background-color: var(--color-surface); 
+        }
+        .input-base:focus {
+            outline: none;
+            border-color: var(--color-primary-light);
+            box-shadow: 0 0 0 3px rgba(var(--color-primary-rgb), 0.25);
+        }
+
         .neumorphic-input {
-            background-color: var(--color-background);
-            border: none;
+            background-color: var(--neumorphism-bg);
             border-radius: 15px;
             padding: 0.9rem 1.2rem;
-            box-shadow: var(--current-shadow-inset);
-            color: var(--color-text);
+            box-shadow: var(--neumorphism-light-shadow-inset);
+            color: var(--color-text); 
             width: 100%;
             transition: box-shadow 0.2s ease;
         }
         .neumorphic-input:focus {
             outline: none;
-            /* A subtle outer glow to indicate focus, complementing inset shadow */
-            box-shadow: var(--current-shadow-inset), 
-                        0 0 0 3px rgba(var(--color-primary-rgb, 109 85 255) / 0.3); 
+            box-shadow: var(--neumorphism-light-shadow-inset), 
+                        0 0 0 3px rgba(var(--color-primary-rgb), 0.25); 
         }
-        /* Adding --color-primary-rgb for the focus ring */
-        :root { --color-primary-rgb: 109, 85, 255; }
-
-
-        /* Modal Styles */
+        
         .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0,0,0,0.5); /* Darker overlay for more focus */
-            align-items: center;
-            justify-content: center;
-            backdrop-filter: blur(5px); /* Frosted glass effect for background */
+            display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%;
+            overflow: auto; background-color: rgba(0,0,0,0.6); align-items: center; justify-content: center;
+            backdrop-filter: blur(4px);
         }
-        .modal-content {
-            margin: auto;
-            padding: clamp(20px, 5vw, 40px);
-            border-radius: 25px;
-            width: 90%;
-            max-width: 550px;
-            position: relative;
-            text-align: left;
+        .modal-content { 
+            background-color: var(--color-surface); 
+            margin: auto; padding: clamp(25px, 5vw, 35px); border-radius: 12px; 
+            width: 90%; max-width: 500px; position: relative; text-align: left;
             animation: slideInModal 0.3s ease-out;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2); 
         }
-        @keyframes slideInModal {
-            from { transform: translateY(-30px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
+        .modal-content.neumorphic-modal-card { 
+            background-color: var(--neumorphism-bg);
+            border-radius: 25px;
+            box-shadow: var(--neumorphism-light-shadow);
         }
+
+        @keyframes slideInModal { from { transform: translateY(-25px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
         .modal-close {
-            color: var(--color-text);
-            position: absolute;
-            top: 20px;
-            right: 25px;
-            font-size: 32px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: color 0.2s;
+            color: var(--color-text); position: absolute; top: 15px; right: 20px;
+            font-size: 28px; font-weight: bold; cursor: pointer; transition: color 0.2s;
         }
         .modal-close:hover { color: var(--color-primary); }
 
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar { width: 10px; }
-        ::-webkit-scrollbar-track { background: var(--color-background); }
-        ::-webkit-scrollbar-thumb { background: var(--color-primary-light); border-radius: 5px; }
-        ::-webkit-scrollbar-thumb:hover { background: var(--color-primary); }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #e9ecef; } 
+        ::-webkit-scrollbar-thumb { background: #adb5bd; border-radius: 4px; } 
+        ::-webkit-scrollbar-thumb:hover { background: #6c757d; }
 
-        /* Utility classes */
         .text-primary { color: var(--color-primary); }
         .text-accent { color: var(--color-accent); }
-        .bg-primary-light-transparent { background-color: rgba(var(--color-primary-rgb), 0.1); } /* For subtle backgrounds */
+        .bg-primary-light-transparent { background-color: rgba(var(--color-primary-rgb), 0.05); }
         
-        /* Responsive header & Nav Link Styling */
         #mainHeader nav a { 
-            margin: 0 12px; 
-            padding: 8px 15px; 
-            border-radius: 12px; 
-            transition: background-color 0.2s, box-shadow 0.2s, color 0.2s;
-            font-weight: 500; /* Slightly less bold than buttons */
+            margin: 0 10px; 
+            padding: 6px 12px; 
+            border-radius: 6px; 
+            transition: color 0.2s, background-color 0.2s;
+            font-weight: 500;
+            color: var(--color-text); 
         }
-        #mainHeader nav a:hover, #mainHeader nav a.active-link {
-            background-color: var(--color-background); /* Matches body for seamless look */
-            box-shadow: -4px -4px 8px #ffffff, 4px 4px 8px #a3b1c6; /* Softer shadow for links */
+        #mainHeader nav a:hover {
             color: var(--color-primary);
+            background-color: rgba(var(--color-primary-rgb), 0.07); 
         }
-        #mobileMenuBtn { display: none; }
+        #mainHeader nav a.active-link {
+            color: var(--color-primary-dark);
+            font-weight: 600;
+        }
+
+        #mobileMenuBtn { display: none; } 
         @media (max-width: 768px) {
             #mainHeaderContainer { flex-wrap: wrap; }
             #mainNav { 
-                display: none; /* Controlled by JS */
+                display: none; 
                 flex-direction: column; 
                 width: 100%; 
-                order: 3; /* Place it below logo and mobile button */
-                margin-top: 1rem;
-                background-color: var(--color-background);
-                border-radius: 20px;
-                box-shadow: var(--current-shadow);
-                padding: 1rem 0;
+                order: 3; 
+                margin-top: 0.5rem; 
+                background-color: var(--color-surface); 
+                border-radius: 8px;
+                box-shadow: 0 4px 10px rgba(0,0,0,0.07); 
+                padding: 0.5rem 0;
             }
-            #mainNav.active { display: flex; } /* JS toggles this */
-            #mainNav a { margin: 8px 0; display:block; text-align: center; width: 90%; margin-left:auto; margin-right:auto;}
-            #mobileMenuBtn { display: block; }
-            .user-profile-container { margin-top: 10px; width:100%; justify-content: center;}
+            #mainNav.active { display: flex; } 
+            #mainNav a { margin: 6px 0; display:block; text-align: center; width: 95%; margin-left:auto; margin-right:auto; padding: 10px 0;}
+            #mobileMenuBtn { display: block; background-color: transparent; border: none; box-shadow: none; color: var(--color-primary); padding: 0.5rem; } 
+            #mobileMenuBtn:hover { background-color: rgba(var(--color-primary-rgb), 0.07); }
+            .user-profile-container { margin-top: 0.5rem; width:100%; justify-content: center;}
         }
         .user-profile-container { display: flex; align-items: center; }
+        #userAvatar { border: 2px solid var(--color-primary-light); box-shadow: none; } 
 
-        /* Section title styling */
         .section-title {
-            font-size: clamp(1.8rem, 5vw, 2.5rem); /* Responsive font size */
-            font-weight: 700;
-            color: var(--color-primary-dark);
-            margin-bottom: 2rem;
+            font-size: clamp(2rem, 5vw, 3rem); 
+            font-weight: 700; 
+            color: #212529; 
+            margin-bottom: 1rem; 
             text-align: center;
-            letter-spacing: -0.5px;
+            letter-spacing: -0.025em; 
         }
         .section-subtitle {
-            font-size: clamp(1rem, 4vw, 1.25rem);
-            color: var(--color-text);
+            font-size: clamp(1.1rem, 3vw, 1.3rem);
+            color: #495057; 
             text-align: center;
-            margin-bottom: 3rem;
-            max-width: 700px;
+            margin-bottom: 2.5rem; 
+            max-width: 650px;
             margin-left: auto;
             margin-right: auto;
+            line-height: 1.6;
         }
-        /* Feature icon styling */
         .feature-icon {
-            font-size: 2rem; /* Slightly larger icons */
+            font-size: 1.8rem; 
             color: var(--color-primary);
-            margin-right: 1rem;
-            width: 40px; /* Fixed width for alignment */
+            margin-right: 0.75rem;
+            width: 35px; 
             text-align: center;
         }
-        .feature-title {
-            font-size: 1.25rem;
+        .feature-title { 
+            font-size: 1.2rem; 
             font-weight: 600;
             color: var(--color-primary-dark);
         }
 
-        /* Ensure Chart.js chart is responsive */
         #progressChartContainer {
-            position: relative;
-            height: 40vh; /* Or any desired height */
-            width: 100%;
-            max-width: 800px; /* Optional: constrain max width */
-            margin: 2rem auto; /* Center it */
-        }
-
-        /* Helper for active section highlighting */
-        .active-section {
-             /* Could add a subtle border or background, but not strictly neumorphic for sections */
+            position: relative; height: 350px; 
+            width: 100%; max-width: 750px; margin: 2rem auto;
+            padding: 1rem; background-color: var(--color-surface); border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.06);
         }
         
-        /* Adding a subtle focus to clickable cards for accessibility */
-        .clickable-card:focus-within {
-             box-shadow: var(--current-shadow), 0 0 0 3px rgba(var(--color-primary-rgb), 0.4);
+        .clickable-card:focus-within { 
+             box-shadow: 0 4px 12px rgba(0,0,0,0.08), 0 0 0 3px rgba(var(--color-primary-rgb), 0.3);
         }
+        main > section {
+            padding-top: 3rem; 
+            padding-bottom: 3rem; 
+        }
+        main > section:first-child { 
+            padding-top: 0; 
+            padding-bottom: 0; 
+        }
+        /* AI Tools Tab Styling */
+        #ia-tools-tabs .tab-button {
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem; /* 8px */
+            font-weight: 500;
+            color: var(--color-text-muted);
+            background-color: transparent;
+            border: 1px solid transparent; /* For consistent height */
+            transition: all 0.2s ease-in-out;
+        }
+        #ia-tools-tabs .tab-button:hover {
+            background-color: rgba(var(--color-primary-rgb), 0.1);
+            color: var(--color-primary);
+        }
+        #ia-tools-tabs .tab-button.active {
+            background-color: var(--color-primary) !important; /* Tailwind was overriding this, so !important */
+            color: white !important;
+            box-shadow: 0 2px 4px rgba(var(--color-primary-rgb), 0.3);
+        }
+        #ia-tools-content .tab-content {
+            padding-top: 1.5rem; /* Add some space below the tabs */
+        }
+        /* Ensure neumorphic cards inside AI tools still look okay with new primary color for text */
+        #ia-tools-content .neumorphic-card .text-primary {
+             color: var(--color-primary) !important;
+        }
+        #ia-tools-content .neumorphic-card .font-semibold.text-primary {
+            color: var(--color-primary) !important;
+        }
+         /* Flashcard neumorphic adjustments */
+        .flashcard-container {
+            perspective: 1000px;
+            width: 100%;
+            max-width: 350px; /* Max width for flashcard */
+            height: 220px; /* Increased height */
+            margin: 1.5rem auto; /* Centering */
+        }
+        .flashcard {
+            width: 100%; height: 100%; position: relative;
+            transform-style: preserve-3d; transition: transform 0.7s; cursor: pointer;
+        }
+        .flashcard.is-flipped { transform: rotateY(180deg); }
+        .flashcard-face {
+            position: absolute; width: 100%; height: 100%;
+            backface-visibility: hidden; display: flex; justify-content: center;
+            align-items: center; padding: 20px; 
+            border-radius: 15px; /* Match neumorphic card radius */
+            font-size: 0.9rem; /* Adjusted font size */
+        }
+        .flashcard-front {
+            background-color: var(--neumorphism-bg);
+            box-shadow: var(--neumorphism-light-shadow);
+            color: var(--color-text);
+        }
+        .flashcard-back {
+            background-color: var(--neumorphism-bg); /* Could be slightly different for distinction */
+            box-shadow: var(--neumorphism-light-shadow);
+            color: var(--color-primary-dark); /* Use primary color for answer */
+            transform: rotateY(180deg);
+        }
+        /* Styling for buttons controlling flashcards if they are neumorphic */
+        #prevFlashcard, #nextFlashcard {
+            /* Apply .neumorphic-button styles if not already applied via class */
+            /* For example, if they are plain buttons, add: */
+            /* class="neumorphic-button text-sm" */
+        }
+
 
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -262,277 +369,267 @@
 <body class="antialiased">
 
     <!-- Header -->
-    <header id="mainHeader" class="sticky top-0 z-50 py-5 px-6 neumorphic-card rounded-none shadow-lg">
-        <div id="mainHeaderContainer" class="container mx-auto flex justify-between items-center">
-            <a href="#" class="text-3xl font-bold text-primary">Study IA</a>
-            <button id="mobileMenuBtn" class="neumorphic-button md:hidden p-2.5">
+    <header id="mainHeader" class="sticky top-0 z-50 bg-surface shadow-sm">
+        <div id="mainHeaderContainer" class="container mx-auto flex justify-between items-center py-4 px-6">
+            <a href="#" class="text-2xl font-bold text-primary">TU IA DE ESTUDIO</a>
+            <button id="mobileMenuBtn" class="md:hidden text-primary">
                 <i class="fas fa-bars text-xl"></i>
             </button>
             <nav id="mainNav" class="hidden md:flex items-center space-x-1">
-                <a href="#vision" class="nav-link">Visión</a>
-                <a href="#caracteristicas" class="nav-link">Características</a>
-                <a href="#tecnologia" class="nav-link">Tecnología</a>
-                <a href="#fases" class="nav-link">Fases</a>
+                <a href="#hero" class="nav-link">Inicio</a>
+                <a href="#ia-tools" class="nav-link">Herramientas</a> {/* Changed href to point to new AI tools section */}
+                <a href="#como-funciona" class="nav-link">Cómo Funciona</a> 
+                <a href="#progreso-dev" class="nav-link">Tu Progreso</a>
                 <a href="#" id="dashboardLink" class="nav-link hidden">Dashboard</a>
-                <div id="authButtons" class="ml-4">
-                    <button id="loginBtn" class="neumorphic-button neumorphic-button-primary">Login</button>
+                <div id="authButtons" class="ml-4 flex items-center space-x-2">
+                    <button id="loginBtn" class="button-base flat-button-primary px-4 py-2 text-sm">Login</button>
                 </div>
                 <div id="userProfileContainer" class="user-profile-container hidden ml-3">
-                    <img id="userAvatar" src="https://via.placeholder.com/40?text=U" alt="User Avatar" class="w-10 h-10 rounded-full neumorphic-card p-0.5" style="box-shadow: var(--current-shadow-inset);">
-                    <span id="userName" class="ml-3 font-semibold text-sm"></span>
-                    <button id="logoutBtn" class="neumorphic-button ml-3 text-xs !p-2">Logout</button>
+                    <img id="userAvatar" src="https://via.placeholder.com/36?text=U" alt="User Avatar" class="w-9 h-9 rounded-full">
+                    <span id="userName" class="ml-2 font-medium text-sm text-gray-700"></span>
+                    <button id="logoutBtn" class="button-base flat-button text-xs !p-2 ml-2">Logout</button>
                 </div>
             </nav>
         </div>
     </header>
 
     <!-- Main Content -->
-    <main class="container mx-auto p-6 mt-6">
-
-        <section id="vision" class="my-16 scroll-mt-20">
-            <div class="neumorphic-card p-8">
-                <h2 class="section-title">Visión del Proyecto: Study IA</h2>
-                <p class="section-subtitle">
-                    Revolucionando el aprendizaje con una plataforma inteligente y adaptativa.
+    <main> 
+        <!-- Hero Section (Replaces #vision) -->
+        <section id="hero" class="bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 py-20 md:py-32 text-center scroll-mt-16">
+            <div class="container mx-auto px-6 max-w-3xl">
+                <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold text-gray-800 mb-6">
+                    La Forma Inteligente de Dominar tus Estudios
+                </h1>
+                <p class="text-lg md:text-xl text-gray-600 mb-10">
+                    Descubre herramientas IA que personalizan tu aprendizaje, optimizan tu tiempo y te ayudan a alcanzar tus metas académicas.
                 </p>
-                <p class="text-lg leading-relaxed mb-4">
-                    Study IA es una plataforma de aprendizaje inteligente diseñada para transformar la forma en que estudiantes y profesionales abordan el estudio y la adquisición de conocimientos. 
-                    Utilizando inteligencia artificial, Study IA ofrecerá herramientas personalizadas que se adaptan al ritmo y estilo de aprendizaje de cada usuario, optimizando su tiempo y mejorando la retención de información.
-                </p>
-                <p class="text-lg leading-relaxed">
-                    El objetivo es crear un asistente de estudio virtual que no solo organice el material, sino que también interactúe con el usuario a través de resúmenes, generación de preguntas, flashcards inteligentes y seguimiento detallado del progreso, todo dentro de una interfaz intuitiva y atractiva con diseño neumorfista.
-                </p>
-            </div>
-        </section>
-
-        <section id="caracteristicas" class="my-16 scroll-mt-20">
-            <h2 class="section-title">Características Centrales</h2>
-            <p class="section-subtitle">Herramientas poderosas para un aprendizaje efectivo.</p>
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="neumorphic-card p-6 clickable-card" tabindex="0">
-                    <div class="flex items-start mb-3">
-                        <i class="fas fa-brain feature-icon"></i>
-                        <h3 class="feature-title">Planes de Estudio Personalizados</h3>
-                    </div>
-                    <p class="text-sm">Algoritmos de IA que analizan el rendimiento y adaptan los planes de estudio, sugiriendo temas y recursos específicos.</p>
-                </div>
-                <div class="neumorphic-card p-6 clickable-card" tabindex="0">
-                    <div class="flex items-start mb-3">
-                        <i class="fas fa-file-alt feature-icon"></i>
-                        <h3 class="feature-title">Resúmenes Inteligentes (Premium)</h3>
-                    </div>
-                    <p class="text-sm">Capacidad de procesar documentos (PDF, TXT) y generar resúmenes concisos, destacando puntos clave. Requiere suscripción.</p>
-                </div>
-                <div class="neumorphic-card p-6 clickable-card" tabindex="0">
-                    <div class="flex items-start mb-3">
-                        <i class="fas fa-question-circle feature-icon"></i>
-                        <h3 class="feature-title">Generador de Preguntas (Premium)</h3>
-                    </div>
-                    <p class="text-sm">A partir de un texto, la IA crea preguntas de práctica para autoevaluación. Requiere suscripción.</p>
-                </div>
-                <div class="neumorphic-card p-6 clickable-card" tabindex="0">
-                    <div class="flex items-start mb-3">
-                        <i class="fas fa-layer-group feature-icon"></i>
-                        <h3 class="feature-title">Flashcards Inteligentes</h3>
-                    </div>
-                    <p class="text-sm">Creación automática de flashcards con sistema de repetición espaciada para optimizar la memorización.</p>
-                </div>
-                <div class="neumorphic-card p-6 clickable-card" tabindex="0">
-                    <div class="flex items-start mb-3">
-                        <i class="fas fa-chart-line feature-icon"></i>
-                        <h3 class="feature-title">Seguimiento de Progreso</h3>
-                    </div>
-                    <p class="text-sm">Dashboard visual con estadísticas sobre tiempo de estudio, temas cubiertos y rendimiento.</p>
-                </div>
-                <div class="neumorphic-card p-6 clickable-card" tabindex="0">
-                     <div class="flex items-start mb-3">
-                        <i class="fas fa-cloud-upload-alt feature-icon"></i>
-                        <h3 class="feature-title">Almacenamiento en la Nube (Premium)</h3>
-                    </div>
-                    <p class="text-sm">Sube tus materiales (PDFs, notas) para ser procesados y organizados por la IA. Requiere suscripción.</p>
-                </div>
-            </div>
-             <div class="text-center mt-10">
-                <button id="ctaSubscribeFeatures" class="neumorphic-button neumorphic-button-primary text-lg">
-                    <i class="fas fa-star mr-2"></i>Acceder a Funciones Premium
+                <button id="heroCtaBtn" class="button-base flat-button-primary text-lg px-8 py-3 transform hover:scale-105">
+                    Comienza Gratis
                 </button>
             </div>
         </section>
         
-        <section id="diseno" class="my-16 scroll-mt-20">
-            <div class="neumorphic-card p-8">
-                <h2 class="section-title">Diseño y Estilo: Neumorfismo</h2>
-                <p class="section-subtitle">Una experiencia de usuario moderna, limpia y atractiva.</p>
-                <div class="md:flex md:items-center">
-                    <div class="md:w-1/2 md:pr-8 mb-6 md:mb-0">
-                        <p class="text-lg leading-relaxed mb-4">
-                            La interfaz de Study IA adoptará un estilo <strong class="text-primary">Neumorfista</strong>. Este enfoque de diseño se caracteriza por elementos que parecen emerger del fondo, creando una sensación táctil y suave. 
-                            Utiliza sombras y luces sutiles para simular profundidad y volumen.
-                        </p>
-                        <ul class="list-none space-y-3 text-md">
-                            <li class="flex items-center"><i class="fas fa-palette fa-fw mr-3 text-accent"></i><strong class="mr-2">Paleta:</strong>Suaves pasteles, primario vibrante.</li>
-                            <li class="flex items-center"><i class="fas fa-font fa-fw mr-3 text-accent"></i><strong class="mr-2">Tipografía:</strong>Poppins, clara y legible.</li>
-                            <li class="flex items-center"><i class="fas fa-icons fa-fw mr-3 text-accent"></i><strong class="mr-2">Iconos:</strong>Minimalistas y consistentes.</li>
-                            <li class="flex items-center"><i class="fas fa-hand-pointer fa-fw mr-3 text-accent"></i><strong class="mr-2">Interacción:</strong>Transiciones suaves, efecto "inset".</li>
-                        </ul>
+        <!-- AI Tools Section - This replaces the old #caracteristicas section -->
+        <section id="ia-tools" class="bg-white scroll-mt-16 py-16 md:py-24">
+            <div class="container mx-auto px-6">
+                <h2 class="section-title">Herramientas IA a Tu Servicio</h2>
+                <p class="section-subtitle">Desde resúmenes hasta generación de preguntas, tenemos lo que necesitas.</p>
+                
+                <div id="ia-tools-tabs" class="mb-8 flex flex-wrap justify-center space-x-2 md:space-x-4 border-b border-gray-300 pb-3">
+                    <button class="tab-button" data-tab="summarizer">Resumidor de Texto</button>
+                    <button class="tab-button" data-tab="qa-generator">Generador de Preguntas</button>
+                    <button class="tab-button active" data-tab="flashcards">Flashcards Inteligentes</button>
+                    <button class="tab-button" data-tab="pdf-upload">Subir PDF para Análisis</button>
+                </div>
+
+                <div id="ia-tools-content">
+                    <div id="summarizer" class="tab-content hidden">
+                        <div class="card-base flat-card max-w-2xl mx-auto">
+                            <h3 class="text-xl font-semibold text-primary-dark mb-4 text-center">Resumidor de Texto con IA</h3>
+                            <textarea id="textToSummarize" class="input-base w-full h-40 p-3 mb-4 text-sm" placeholder="Pega aquí el texto que quieres resumir..."></textarea>
+                            <button id="summarizeBtn" class="button-base flat-button-primary w-full sm:w-auto block mx-auto px-6 py-2">Resumir</button>
+                            <div id="summaryOutput" class="mt-5 min-h-[100px] text-sm text-gray-700 p-3 bg-gray-50 rounded-md border border-gray-200"></div>
+                        </div>
                     </div>
-                    <div class="md:w-1/2 grid grid-cols-2 gap-4">
-                        <div class="neumorphic-card !p-4 text-center aspect-square flex flex-col justify-center items-center"><i class="fas fa-lightbulb fa-3x text-primary mb-2"></i>Elemento 1</div>
-                        <div class="neumorphic-card !p-4 text-center aspect-square flex flex-col justify-center items-center !shadow-[var(--current-shadow-inset)]"><i class="fas fa-cube fa-3x text-primary mb-2"></i>Elemento Inset</div>
-                        <button class="neumorphic-button col-span-2">Botón Neumórfico</button>
+
+                    <div id="qa-generator" class="tab-content hidden">
+                        <div class="card-base flat-card max-w-2xl mx-auto">
+                            <h3 class="text-xl font-semibold text-primary-dark mb-4 text-center">Generador de Preguntas y Respuestas</h3>
+                            <textarea id="textForQA" class="input-base w-full h-40 p-3 mb-4 text-sm" placeholder="Pega aquí el texto para generar preguntas..."></textarea>
+                            <button id="generateQABtn" class="button-base flat-button-primary w-full sm:w-auto block mx-auto px-6 py-2">Generar Preguntas</button>
+                            <div id="qaOutput" class="mt-5 min-h-[100px] text-sm text-gray-700 p-3 bg-gray-50 rounded-md border border-gray-200"></div>
+                        </div>
+                    </div>
+
+                    <div id="flashcards" class="tab-content"> {/* Default active tab */}
+                        <div class="card-base flat-card max-w-lg mx-auto text-center">
+                            <h3 class="text-xl font-semibold text-primary-dark mb-2">Flashcards Inteligentes</h3>
+                            <p class="text-xs text-gray-500 mb-4">Haz clic en la tarjeta para ver la respuesta.</p>
+                            <div class="flashcard-container">
+                                <div class="flashcard card-base flat-card" id="flashcard"> {/* Applied flat card style */}
+                                    <div class="flashcard-face flashcard-front justify-center items-center flex p-4"></div>
+                                    <div class="flashcard-face flashcard-back justify-center items-center flex p-4"></div>
+                                </div>
+                            </div>
+                            <div class="mt-5 flex justify-center space-x-3">
+                                <button id="prevFlashcard" class="button-base flat-button px-4 py-2 text-sm"><i class="fas fa-arrow-left mr-1"></i> Anterior</button>
+                                <button id="nextFlashcard" class="button-base flat-button px-4 py-2 text-sm">Siguiente <i class="fas fa-arrow-right ml-1"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="pdf-upload" class="tab-content hidden">
+                        <div class="card-base flat-card max-w-md mx-auto">
+                            <h3 class="text-xl font-semibold text-primary-dark mb-4 text-center">Analiza tus Documentos PDF</h3>
+                            <label for="pdfFile" class="block text-sm font-medium text-gray-700 mb-2">Sube un archivo PDF para análisis:</label>
+                            <input type="file" id="pdfFile" name="pdfFile" accept=".pdf" class="input-base block w-full text-sm file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-primary hover:file:bg-blue-100">
+                            <button id="uploadPdfBtn" class="button-base flat-button-primary w-full mt-5 py-2">Subir y Analizar PDF</button>
+                            <div id="pdfUploadStatus" class="mt-3 text-sm text-center h-4"></div>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="tecnologia" class="my-16 scroll-mt-20">
-            <h2 class="section-title">Arquitectura Tecnológica</h2>
-            <p class="section-subtitle">Componentes modernos para una plataforma robusta y escalable.</p>
-            <div class="neumorphic-card p-8">
-                <div class="grid md:grid-cols-2 gap-x-8 gap-y-6">
-                    <div>
-                        <h3 class="text-xl font-semibold text-primary-dark mb-3"><i class="fas fa-desktop mr-2"></i>Frontend</h3>
-                        <ul class="list-disc list-inside space-y-1 pl-2">
-                            <li>Vanilla JavaScript con Tailwind CSS</li>
-                            <li>Neumorfismo (CSS personalizado)</li>
-                            <li>Chart.js para gráficos de progreso</li>
-                            <li>Firebase JS SDK (v11.6.1 Módulos ES)</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h3 class="text-xl font-semibold text-primary-dark mb-3"><i class="fas fa-server mr-2"></i>Backend & Base de Datos</h3>
-                        <ul class="list-disc list-inside space-y-1 pl-2">
-                            <li>Firebase (Authentication, Firestore, Storage)</li>
-                            <li>Firestore (NoSQL) para datos de usuario</li>
-                            <li>Firebase Storage para archivos (PDFs)</li>
-                        </ul>
-                    </div>
-                    <div class="md:col-span-2">
-                        <h3 class="text-xl font-semibold text-primary-dark mb-3 mt-4"><i class="fas fa-microchip mr-2"></i>Inteligencia Artificial</h3>
-                        <p class="mb-2 text-sm">Inicialmente simulado en frontend, con planes de integración real:</p>
-                        <ul class="list-disc list-inside space-y-1 pl-2">
-                            <li>Procesamiento de Lenguaje Natural (NLP): APIs (OpenAI, Cohere) o modelos Hugging Face.</li>
-                            <li>Algoritmos de Aprendizaje Adaptativo: Lógica personalizada.</li>
-                        </ul>
+        <section id="tecnologia" class="bg-gray-50 scroll-mt-16 py-16 md:py-24"> 
+            <div class="container mx-auto px-6">
+                <h2 class="section-title">Tecnología Confiable</h2>
+                <p class="section-subtitle">Construido con herramientas modernas para una experiencia fluida.</p>
+                <div class="card-base flat-card p-8"> 
+                    <div class="grid md:grid-cols-2 gap-x-8 gap-y-6">
+                        <div>
+                            <h3 class="text-xl font-semibold text-primary-dark mb-3"><i class="fas fa-desktop mr-2"></i>Frontend</h3>
+                            <ul class="list-disc list-inside space-y-1 pl-2 text-sm text-gray-700">
+                                <li>Vanilla JavaScript con Tailwind CSS</li>
+                                <li>CSS Personalizado para estilos base</li>
+                                <li>Chart.js para gráficos de progreso</li>
+                                <li>Firebase JS SDK (v11.6.1 Módulos ES)</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-primary-dark mb-3"><i class="fas fa-server mr-2"></i>Backend & Base de Datos</h3>
+                            <ul class="list-disc list-inside space-y-1 pl-2 text-sm text-gray-700">
+                                <li>Firebase (Authentication, Firestore, Storage)</li>
+                                <li>Firestore (NoSQL) para datos de usuario</li>
+                                <li>Firebase Storage para archivos (PDFs)</li>
+                            </ul>
+                        </div>
+                        <div class="md:col-span-2">
+                            <h3 class="text-xl font-semibold text-primary-dark mb-3 mt-4"><i class="fas fa-microchip mr-2"></i>Inteligencia Artificial</h3>
+                            <p class="mb-2 text-sm text-gray-700">Inicialmente simulado en frontend, con planes de integración real:</p>
+                            <ul class="list-disc list-inside space-y-1 pl-2 text-sm text-gray-700">
+                                <li>Procesamiento de Lenguaje Natural (NLP): APIs (OpenAI, Cohere) o modelos Hugging Face.</li>
+                                <li>Algoritmos de Aprendizaje Adaptativo: Lógica personalizada.</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="progreso-dev" class="my-16 scroll-mt-20">
-            <h2 class="section-title">Progreso del Desarrollo (Simulado)</h2>
-            <p class="section-subtitle">Visualización del avance en las funcionalidades clave.</p>
-            <div class="neumorphic-card p-8">
-                <div id="progressChartContainer">
+        <section id="progreso-dev" class="bg-white scroll-mt-16 py-16 md:py-24">
+             <div class="container mx-auto px-6">
+                <h2 class="section-title">Tu Panel de Progreso</h2>
+                <p class="section-subtitle">Visualiza tu avance y mantente motivado.</p>
+                
+                <div id="progressChartContainer"> 
                     <canvas id="progressChart"></canvas>
                 </div>
             </div>
         </section>
 
-        <section id="fases" class="my-16 scroll-mt-20">
-            <h2 class="section-title">Fases de Desarrollo</h2>
-            <p class="section-subtitle">Un enfoque iterativo para construir Study IA.</p>
-            <div class="space-y-6">
-                <div class="neumorphic-card p-6 clickable-card" tabindex="0">
-                    <h3 class="feature-title mb-1">Fase 1: MVP (Producto Mínimo Viable)</h3>
-                    <p class="text-sm">Autenticación, diseño base, carga de PDF (simulada), simulación frontend de IA (resúmenes, Q&A), dashboard básico (Chart.js), simulación de suscripción.</p>
-                </div>
-                <div class="neumorphic-card p-6 clickable-card" tabindex="0">
-                    <h3 class="feature-title mb-1">Fase 2: Integración IA y Funciones Core</h3>
-                    <p class="text-sm">Integración API NLP, flashcards inteligentes, persistencia de datos en Firestore, dashboard con datos reales.</p>
-                </div>
-                <div class="neumorphic-card p-6 clickable-card" tabindex="0">
-                    <h3 class="feature-title mb-1">Fase 3: Personalización y Escalabilidad</h3>
-                    <p class="text-sm">Algoritmo de planes de estudio personalizados, optimización, funciones colaborativas (opcional), mejoras iterativas.</p>
+        <section id="como-funciona" class="bg-gray-50 scroll-mt-16 py-16 md:py-24"> 
+            <div class="container mx-auto px-6">
+                <h2 class="section-title">Cómo Empezar</h2>
+                <p class="section-subtitle">Sigue estos simples pasos para potenciar tu aprendizaje.</p>
+                <div class="space-y-8 md:space-y-0 md:grid md:grid-cols-3 md:gap-x-8">
+                    <div class="card-base flat-card p-6 text-center">
+                        <div class="text-4xl text-primary mb-4"><i class="fas fa-user-plus"></i></div>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-2">1. Regístrate</h3>
+                        <p class="text-sm text-gray-600">Crea tu cuenta gratuita en segundos.</p>
+                    </div>
+                    <div class="card-base flat-card p-6 text-center">
+                        <div class="text-4xl text-primary mb-4"><i class="fas fa-tools"></i></div>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-2">2. Explora Herramientas</h3>
+                        <p class="text-sm text-gray-600">Prueba nuestras funciones IA gratuitas y considera las Premium.</p>
+                    </div>
+                    <div class="card-base flat-card p-6 text-center">
+                        <div class="text-4xl text-primary mb-4"><i class="fas fa-rocket"></i></div>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-2">3. Potencia tu Estudio</h3>
+                        <p class="text-sm text-gray-600">Suscríbete para acceso ilimitado y funciones avanzadas.</p>
+                    </div>
                 </div>
             </div>
         </section>
     </main>
 
-    <footer class="py-10 text-center neumorphic-card rounded-none mt-16">
-        <p class="text-md">&copy; <span id="currentYear"></span> Study IA. Todos los derechos reservados.</p>
-        <p class="text-sm text-gray-600 mt-1">Innovando el aprendizaje con Inteligencia Artificial.</p>
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-gray-300 py-12 text-center">
+        <div class="container mx-auto px-6">
+            <p class="text-sm">&copy; <span id="currentYear"></span> TU IA DE ESTUDIO. Todos los derechos reservados.</p>
+            <p class="text-xs text-gray-500 mt-1">Transformando el aprendizaje con Inteligencia Artificial.</p>
+        </div>
     </footer>
 
     <!-- Login Modal -->
     <div id="loginModal" class="modal">
-        <div class="modal-content neumorphic-card">
+        <div class="modal-content card-base flat-card"> 
             <span class="modal-close" data-modal-id="loginModal">&times;</span>
-            <h2 class="text-2xl font-bold text-primary mb-6 text-center">Iniciar Sesión</h2>
+            <h2 class="text-xl font-semibold text-gray-800 mb-6 text-center">Iniciar Sesión</h2>
             <form id="loginForm" class="space-y-6">
                 <div>
-                    <label for="loginEmail" class="block text-sm font-semibold mb-2">Email</label>
-                    <input type="email" id="loginEmail" class="neumorphic-input" required>
+                    <label for="loginEmail" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                    <input type="email" id="loginEmail" class="input-base" required> 
                 </div>
                 <div>
-                    <label for="loginPassword" class="block text-sm font-semibold mb-2">Contraseña</label>
-                    <input type="password" id="loginPassword" class="neumorphic-input" required>
+                    <label for="loginPassword" class="block text-sm font-medium text-gray-700 mb-1">Contraseña</label>
+                    <input type="password" id="loginPassword" class="input-base" required> 
                 </div>
-                <button type="submit" class="neumorphic-button neumorphic-button-primary w-full py-3">Login</button>
+                <button type="submit" class="button-base flat-button-primary w-full py-2.5">Login</button> 
             </form>
-            <p id="loginError" class="text-red-500 text-sm mt-4 text-center h-4"></p>
-            <p class="mt-4 text-center text-sm">¿No tienes cuenta? <a href="#" id="showRegisterLink" class="text-primary hover:underline font-semibold">Regístrate</a></p>
+            <p id="loginError" class="text-red-500 text-xs mt-3 text-center h-3"></p>
+            <p class="mt-3 text-center text-xs">¿No tienes cuenta? <a href="#" id="showRegisterLink" class="text-primary hover:underline font-medium">Regístrate</a></p>
         </div>
     </div>
 
     <!-- Registration Modal -->
     <div id="registerModal" class="modal">
-        <div class="modal-content neumorphic-card">
+        <div class="modal-content card-base flat-card"> 
             <span class="modal-close" data-modal-id="registerModal">&times;</span>
-            <h2 class="text-2xl font-bold text-primary mb-6 text-center">Crear Cuenta</h2>
+            <h2 class="text-xl font-semibold text-gray-800 mb-6 text-center">Crear Cuenta</h2>
             <form id="registerForm" class="space-y-5">
                 <div>
-                    <label for="registerName" class="block text-sm font-semibold mb-2">Nombre Completo</label>
-                    <input type="text" id="registerName" class="neumorphic-input" required>
+                    <label for="registerName" class="block text-sm font-medium text-gray-700 mb-1">Nombre Completo</label>
+                    <input type="text" id="registerName" class="input-base" required> 
                 </div>
                 <div>
-                    <label for="registerEmail" class="block text-sm font-semibold mb-2">Email</label>
-                    <input type="email" id="registerEmail" class="neumorphic-input" required>
+                    <label for="registerEmail" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                    <input type="email" id="registerEmail" class="input-base" required> 
                 </div>
                 <div>
-                    <label for="registerPassword" class="block text-sm font-semibold mb-2">Contraseña</label>
-                    <input type="password" id="registerPassword" class="neumorphic-input" required minlength="6">
+                    <label for="registerPassword" class="block text-sm font-medium text-gray-700 mb-1">Contraseña</label>
+                    <input type="password" id="registerPassword" class="input-base" required minlength="6"> 
                 </div>
-                <button type="submit" class="neumorphic-button neumorphic-button-primary w-full py-3">Registrarse</button>
+                <button type="submit" class="button-base flat-button-primary w-full py-2.5">Registrarse</button> 
             </form>
-            <p id="registerError" class="text-red-500 text-sm mt-4 text-center h-4"></p>
-            <p class="mt-4 text-center text-sm">¿Ya tienes cuenta? <a href="#" id="showLoginLink" class="text-primary hover:underline font-semibold">Inicia Sesión</a></p>
+            <p id="registerError" class="text-red-500 text-xs mt-3 text-center h-3"></p>
+            <p class="mt-3 text-center text-xs">¿Ya tienes cuenta? <a href="#" id="showLoginLink" class="text-primary hover:underline font-medium">Inicia Sesión</a></p>
         </div>
     </div>
     
     <!-- Subscription Modal -->
     <div id="subscriptionModal" class="modal">
-        <div class="modal-content neumorphic-card">
+        <div class="modal-content card-base flat-card"> 
             <span class="modal-close" data-modal-id="subscriptionModal">&times;</span>
-            <h2 class="text-2xl font-bold text-primary mb-3 text-center">Desbloquea Todo el Potencial</h2>
-            <p class="text-center text-sm mb-5">Elige un plan para acceder a funciones premium como análisis de documentos y herramientas IA avanzadas.</p>
+            <h2 class="text-xl font-semibold text-gray-800 mb-4 text-center">Desbloquea Todo el Potencial</h2>
+            <p class="text-center text-xs text-gray-600 mb-5">Elige un plan para acceder a funciones premium como análisis de documentos y herramientas IA avanzadas.</p>
             
-            <div class="neumorphic-card p-5 mb-5 !shadow-[var(--current-shadow-inset)] bg-primary-light-transparent">
-                <h3 class="text-xl font-semibold text-primary-dark mb-2">Plan Premium Mensual</h3>
-                <p class="text-3xl font-bold mb-1 text-primary-dark">$20 <span class="text-sm font-normal">/ mes</span></p>
-                <p class="text-xs text-gray-600 mb-3">Acceso completo, almacenamiento ilimitado, soporte prioritario.</p>
-                <button id="subscribeBtn" class="neumorphic-button neumorphic-button-primary w-full py-2.5">Suscribirse (Simulado)</button>
+            <div class="card-base bg-primary-light-transparent p-4 mb-5 border border-gray-200 rounded-lg"> 
+                <h3 class="text-lg font-semibold text-primary-dark mb-1">Plan Premium Mensual</h3>
+                <p class="text-2xl font-bold mb-1 text-primary-dark">$20 <span class="text-sm font-normal text-gray-600">/ mes</span></p>
+                <p class="text-xs text-gray-500 mb-3">Acceso completo, almacenamiento ilimitado, soporte prioritario.</p>
+                <button id="subscribeBtn" class="button-base flat-button-primary w-full py-2">Suscribirse (Simulado)</button> 
             </div>
 
-            <div id="paymentSimulation" class="hidden mt-5">
-                 <h4 class="text-md font-semibold text-primary-dark mb-2">Simulación de Pago (Crypto):</h4>
-                 <p class="text-xs mb-1">Para completar tu suscripción (simulada):</p>
-                 <p class="text-xs mb-1">1. Envía <strong class="text-primary">20 USDT</strong> (BEP20/BSC) a:</p>
-                 <p class="neumorphic-input !text-xs !p-2 my-2 break-all" id="cryptoWalletAddress">0xAbCdEf1234567890AbCdEf1234567890AbCdEf12</p>
-                 <p class="text-xs mb-3">2. Una vez enviado, haz clic en "Confirmar Pago".</p>
-                 <button id="confirmPaymentBtn" class="neumorphic-button w-full !py-2">Confirmar Pago (Simulado)</button>
+            <div id="paymentSimulation" class="hidden mt-4">
+                 <h4 class="text-sm font-semibold text-gray-700 mb-1">Simulación de Pago (Crypto):</h4>
+                 <p class="text-xs text-gray-600 mb-1">1. Envía <strong class="text-primary">20 USDT</strong> (BEP20/BSC) a:</p>
+                 <p class="input-base !text-xs !p-1.5 my-1 break-all bg-gray-100">0xAbCdEf1234567890AbCdEf1234567890AbCdEf12</p> 
+                 <p class="text-xs text-gray-600 mb-2">2. Una vez enviado, haz clic en "Confirmar Pago".</p>
+                 <button id="confirmPaymentBtn" class="button-base flat-button w-full !py-1.5 text-sm">Confirmar Pago (Simulado)</button> 
             </div>
-            <p id="subscriptionMsg" class="text-center mt-3 text-sm h-4"></p>
+            <p id="subscriptionMsg" class="text-center mt-2 text-xs h-3"></p>
         </div>
     </div>
 
     <!-- Generic Message Modal -->
     <div id="messageModal" class="modal">
-        <div class="modal-content neumorphic-card text-center">
+        <div class="modal-content card-base flat-card text-center"> 
             <span class="modal-close" data-modal-id="messageModal">&times;</span>
-            <h2 id="messageModalTitle" class="text-2xl font-bold text-primary mb-4">Mensaje</h2>
-            <p id="messageModalText" class="text-lg mb-6"></p>
-            <button id="messageModalCloseBtn" class="neumorphic-button">Entendido</button>
+            <h2 id="messageModalTitle" class="text-xl font-semibold text-gray-800 mb-3">Mensaje</h2>
+            <p id="messageModalText" class="text-md text-gray-600 mb-5"></p>
+            <button id="messageModalCloseBtn" class="button-base flat-button-primary px-6 py-2">Entendido</button> 
         </div>
     </div>
 
@@ -576,6 +673,7 @@
             userName: document.getElementById('userName'),
             userAvatar: document.getElementById('userAvatar'),
             dashboardLink: document.getElementById('dashboardLink'),
+            heroCtaBtn: document.getElementById('heroCtaBtn'), 
             
             loginModal: document.getElementById('loginModal'),
             registerModal: document.getElementById('registerModal'),
@@ -617,20 +715,20 @@
             // AI Tool Tab buttons for visual cues
             summarizerTabBtn: document.querySelector('[data-tab="summarizer"]'),
             qaGeneratorTabBtn: document.querySelector('[data-tab="qa-generator"]'),
-            flashcardsTabBtn: document.querySelector('[data-tab="flashcards"]'), // For styling consistency
-            pdfUploadTabBtn: document.querySelector('[data-tab="pdf-upload"]') // For styling consistency
+            flashcardsTabBtn: document.querySelector('[data-tab="flashcards"]'), 
+            pdfUploadTabBtn: document.querySelector('[data-tab="pdf-upload"]') 
         };
 
         // --- Modal Logic ---
         const openModal = (modal) => { 
             if (modal) modal.style.display = 'flex'; 
-            setTimeout(() => { // Ensure display:flex is applied before adding class
+            setTimeout(() => { 
                 if (modal && modal.firstElementChild) modal.firstElementChild.classList.add('modal-open-animate');
             }, 10);
         };
         const closeModal = (modal) => {
             if (modal && modal.firstElementChild) {
-                modal.firstElementChild.classList.remove('modal-open-animate'); // Optional: add close animation class
+                modal.firstElementChild.classList.remove('modal-open-animate'); 
             }
             if (modal) modal.style.display = 'none';
         };
@@ -649,7 +747,8 @@
             if (event.target === uiElements.messageModal) closeModal(uiElements.messageModal);
         });
         
-        const showMessageModal = (title, text) => {
+        // Make showMessageModal globally available
+        window.showMessageModal = (title, text) => {
             if(uiElements.messageModalTitle) uiElements.messageModalTitle.textContent = title;
             if(uiElements.messageModalText) uiElements.messageModalText.textContent = text;
             openModal(uiElements.messageModal);
@@ -674,7 +773,7 @@
         onAuthStateChanged(firebaseAuth, async (user) => {
             window.currentUser = user;
             if (user) {
-                renderProgressChart(); // Call chart rendering when user is confirmed
+                renderProgressChart(); 
                 uiElements.authButtons?.classList.add('hidden');
                 uiElements.userProfileContainer?.classList.remove('hidden');
                 uiElements.userProfileContainer?.classList.add('flex');
@@ -689,8 +788,8 @@
                     if (docSnap.exists() && docSnap.data().subscriptionPlan) {
                         window.userSubscriptionPlan = docSnap.data().subscriptionPlan;
                     } else {
-                        window.userSubscriptionPlan = 'free'; // Default if not set
-                        if (!docSnap.exists()) { // Create user doc if it doesn't exist from registration
+                        window.userSubscriptionPlan = 'free'; 
+                        if (!docSnap.exists()) { 
                              await setDoc(userDocRef, {
                                 displayName: user.displayName,
                                 email: user.email,
@@ -713,7 +812,7 @@
                 window.userSubscriptionPlan = 'free';
             }
             updateUIBasedOnSubscription();
-            renderProgressChart(); // Also call here to handle logged-out state or initial load with no user
+            renderProgressChart(); 
         });
 
         uiElements.loginForm?.addEventListener('submit', (e) => {
@@ -761,7 +860,6 @@
                 });
         });
         
-        // --- Subscription Logic & UI ---
         const handleSubscriptionClick = () => {
             if (!window.currentUser) {
                 showMessageModal("Autenticación Requerida", "Por favor, inicia sesión o regístrate para suscribirte.");
@@ -822,7 +920,6 @@
         window.updateUIBasedOnSubscription = () => {
             const isPremium = window.userSubscriptionPlan === 'premium';
 
-            // Subscription buttons
             if (uiElements.subscribeBtn) {
                 uiElements.subscribeBtn.textContent = isPremium ? 'Ya Estás Suscrito' : 'Suscribirse (Simulado)';
                 uiElements.subscribeBtn.disabled = isPremium;
@@ -830,25 +927,29 @@
             if (uiElements.ctaSubscribeFeatures) {
                  uiElements.ctaSubscribeFeatures.textContent = isPremium ? 'Acceso Premium Activado' : 'Acceder a Funciones Premium';
                  uiElements.ctaSubscribeFeatures.disabled = isPremium;
-                 if(isPremium) uiElements.ctaSubscribeFeatures.classList.replace('neumorphic-button-primary', 'neumorphic-button');
-                 else uiElements.ctaSubscribeFeatures.classList.replace('neumorphic-button', 'neumorphic-button-primary');
+                 // Use flat button styles for ctaSubscribeFeatures
+                 if(isPremium) {
+                    uiElements.ctaSubscribeFeatures.classList.remove('flat-button-primary');
+                    uiElements.ctaSubscribeFeatures.classList.add('flat-button'); // A less prominent style for "already active"
+                 } else {
+                    uiElements.ctaSubscribeFeatures.classList.remove('flat-button');
+                    uiElements.ctaSubscribeFeatures.classList.add('flat-button-primary');
+                 }
             }
             
-            // Update main page feature titles "(Premium)" text
-             document.querySelectorAll('#caracteristicas .feature-title').forEach(titleEl => {
+             document.querySelectorAll('#caracteristicas .feature-title').forEach(titleEl => { // Keep this selector for now if #caracteristicas still exists
                 const originalText = titleEl.dataset.originalText || titleEl.textContent;
-                titleEl.dataset.originalText = originalText; // Store original text if not already stored
+                titleEl.dataset.originalText = originalText; 
 
                 if (originalText.includes('(Premium)')) {
                     if (isPremium) {
                         titleEl.innerHTML = originalText.replace('(Premium)', '<span class="text-xs text-accent ml-1">(Activado)</span>');
                     } else {
-                        titleEl.innerHTML = originalText; // Revert to original text which includes "(Premium)"
+                        titleEl.innerHTML = originalText; 
                     }
                 }
             });
 
-            // AI Tools specific UI updates
             const premiumMessage = 'Función Premium. Suscríbete para desbloquear.';
             const defaultSummarizerTitle = 'Resumidor de Texto';
             const defaultQAGeneratorTitle = 'Generador de Preguntas';
@@ -866,7 +967,6 @@
                 uiElements.qaGeneratorTabBtn.style.opacity = isPremium ? '1' : '0.65';
                 uiElements.qaGeneratorTabBtn.title = isPremium ? defaultQAGeneratorTitle : premiumMessage;
             }
-            // Ensure free tabs are fully opaque and have default titles
             if (uiElements.flashcardsTabBtn) {
                 uiElements.flashcardsTabBtn.style.opacity = '1';
                 uiElements.flashcardsTabBtn.title = 'Flashcards Inteligentes';
@@ -876,12 +976,10 @@
                 uiElements.pdfUploadTabBtn.title = 'Subir PDF para Análisis';
             }
 
-            // Clear outputs or show premium message if user is not premium or logs out
             if (!isPremium) {
                 if (uiElements.summaryOutput) uiElements.summaryOutput.innerHTML = `<p class="text-center text-accent p-4">${premiumMessage}</p>`;
                 if (uiElements.qaOutput) uiElements.qaOutput.innerHTML = `<p class="text-center text-accent p-4">${premiumMessage}</p>`;
             } else {
-                 // When user becomes premium, clear these messages if they were set
                  if (uiElements.summaryOutput && uiElements.summaryOutput.innerHTML.includes(premiumMessage)) {
                     uiElements.summaryOutput.innerHTML = '';
                  }
@@ -891,15 +989,14 @@
             }
         };
 
-        // --- General UI & Utility ---
         if(uiElements.currentYear) uiElements.currentYear.textContent = new Date().getFullYear();
         
-        // Smooth scrolling & Active Link Highlighting
         const updateActiveLink = () => {
             let currentSectionId = '';
+            const headerHeight = document.getElementById('mainHeader')?.offsetHeight || 70; // Fallback if header not found
             uiElements.sections.forEach(section => {
                 const sectionTop = section.offsetTop;
-                if (window.scrollY >= sectionTop - (uiElements.mainNav.offsetHeight + 25) ) { // Adjusted offset
+                if (window.scrollY >= sectionTop - (headerHeight + 25) ) { 
                     currentSectionId = section.getAttribute('id');
                 }
             });
@@ -912,7 +1009,7 @@
             });
         };
         window.addEventListener('scroll', updateActiveLink);
-        updateActiveLink(); // Initial call
+        updateActiveLink(); 
 
         uiElements.navLinks.forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -920,8 +1017,7 @@
                 const targetId = this.getAttribute('href');
                 const targetElement = document.querySelector(targetId);
                 if (targetElement) {
-                     // Calculate position considering sticky header height
-                    const headerOffset = uiElements.mainHeader.offsetHeight + 20; // Extra padding
+                    const headerOffset = document.getElementById('mainHeader')?.offsetHeight || 70; 
                     const elementPosition = targetElement.getBoundingClientRect().top + window.scrollY;
                     const offsetPosition = elementPosition - headerOffset;
 
@@ -930,8 +1026,11 @@
                         behavior: 'smooth'
                     });
                 }
-                if (uiElements.mainNav.classList.contains('active')) { // For mobile
+                if (uiElements.mainNav.classList.contains('active')) { 
                     uiElements.mainNav.classList.remove('active');
+                     const icon = uiElements.mobileMenuBtn.querySelector('i');
+                     icon?.classList.remove('fa-times');
+                     icon?.classList.add('fa-bars');
                 }
             });
         });
@@ -953,8 +1052,21 @@
                 showMessageModal("Dashboard Acceso", "¡Bienvenido a tu Dashboard Premium! (Contenido del dashboard se mostraría aquí).");
             }
         });
+         uiElements.heroCtaBtn?.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (!window.currentUser) {
+                openModal(uiElements.loginModal);
+            } else {
+                const caracteristicasSection = document.getElementById('caracteristicas'); // This will be the new #ia-tools section eventually
+                if (caracteristicasSection) { // If #caracteristicas is removed, this should point to #ia-tools
+                     const headerOffset = document.getElementById('mainHeader')?.offsetHeight || 70;
+                     const elementPosition = caracteristicasSection.getBoundingClientRect().top + window.scrollY;
+                     const offsetPosition = elementPosition - headerOffset;
+                     window.scrollTo({ top: offsetPosition, behavior: 'smooth'});
+                }
+            }
+        });
         
-        // --- Chart.js Example ---
         let progressChartInstance = null;
         const renderProgressChart = async () => {
             if (!uiElements.progressChartCanvas) return;
@@ -974,7 +1086,7 @@
                 }, {
                     label: 'Tareas Completadas',
                     data: [],
-                    backgroundColor: 'rgba(var(--color-accent-rgb, 255 171 118) / 0.2)', // Added --color-accent-rgb to :root
+                    backgroundColor: 'rgba(var(--color-accent-rgb, 255 171 118) / 0.2)', 
                     borderColor: 'var(--color-accent)',
                     borderWidth: 2,
                     borderRadius: 5,
@@ -998,14 +1110,13 @@
                     const docSnap = await getDoc(userDocRef);
 
                     if (docSnap.exists() && docSnap.data().progressEntries && docSnap.data().progressEntries.length > 0) {
-                        const progressEntries = docSnap.data().progressEntries.sort((a,b) => new Date(a.timestamp) - new Date(b.timestamp)); // Sort by timestamp
+                        const progressEntries = docSnap.data().progressEntries.sort((a,b) => new Date(a.timestamp) - new Date(b.timestamp)); 
                         
                         chartDataConfig.labels = progressEntries.map(entry => entry.label);
                         chartDataConfig.datasets[0].data = progressEntries.map(entry => entry.studyHours || 0);
                         chartDataConfig.datasets[1].data = progressEntries.map(entry => entry.tasksCompleted || 0);
                         chartOptions.plugins.title.text = 'Mi Progreso de Estudio';
                     } else {
-                        // User is logged in, but no progress data found - use example data with a note
                         chartDataConfig.labels = ['Semana 1 (Ej.)', 'Semana 2 (Ej.)', 'Semana 3 (Ej.)', 'Semana 4 (Ej.)'];
                         chartDataConfig.datasets[0].data = [5, 7, 6, 8];
                         chartDataConfig.datasets[1].data = [10, 12, 15, 13];
@@ -1013,15 +1124,13 @@
                     }
                 } catch (error) {
                     console.error("Error fetching progress data:", error);
-                    // Keep example data if Firestore fetch fails
                     chartDataConfig.labels = ['Error al cargar datos'];
                     chartOptions.plugins.title.text = 'Error al cargar datos de progreso';
                 }
             } else {
-                // No user logged in - use example data
                 chartDataConfig.labels = ['Fase 1 (Ej.)', 'Fase 2 (Ej.)', 'Fase 3 (Ej.)'];
-                chartDataConfig.datasets[0].data = [10, 20, 5]; // Example study hours
-                chartDataConfig.datasets[1].data = [3, 5, 2];   // Example tasks completed
+                chartDataConfig.datasets[0].data = [10, 20, 5]; 
+                chartDataConfig.datasets[1].data = [3, 5, 2];   
                 chartOptions.plugins.title.text = 'Progreso General (Ejemplo - Inicia Sesión para ver el tuyo)';
             }
 
@@ -1029,28 +1138,21 @@
                 progressChartInstance.destroy();
             }
             
-            // Add :root variable for accent color RGB if not already present
             if (!document.documentElement.style.getPropertyValue('--color-accent-rgb')) {
-                 document.documentElement.style.setProperty('--color-accent-rgb', '255, 171, 118'); // Default if not in CSS :root
+                 document.documentElement.style.setProperty('--color-accent-rgb', '108, 117, 125'); 
             }
 
-
             progressChartInstance = new Chart(ctx, {
-                type: 'line', // Changed to line for better trend visualization of studyHours/tasksCompleted
+                type: 'line', 
                 data: chartDataConfig,
                 options: chartOptions
             });
         };
         
-        // Call initializations
-        // renderProgressChart() is now called within onAuthStateChanged.
-        // updateUIBasedOnSubscription will be called by onAuthStateChanged
     </script>
 
-    <!-- Separate script for AI tools simulations and DOMContentLoaded -->
     <script type="module">
         document.addEventListener('DOMContentLoaded', () => {
-            // AI Tools Elements (re-declared here for this module's scope, or could be passed from global uiElements)
             const summarizeBtnDOM = document.getElementById('summarizeBtn');
             const textToSummarizeDOM = document.getElementById('textToSummarize');
             const summaryOutputDOM = document.getElementById('summaryOutput');
@@ -1059,13 +1161,11 @@
             const textForQADOM = document.getElementById('textForQA');
             const qaOutputDOM = document.getElementById('qaOutput');
             
-            // Helper to get the showMessageModal function if it's globally available from the other script
             const showGlobalMessageModal = (title, message) => {
                 if (typeof window.showMessageModal === 'function') { 
                     window.showMessageModal(title, message);
                 } else { 
                     alert(`${title}: ${message}`);
-                    console.warn("Global showMessageModal not found, using alert fallback.");
                 }
             };
             
@@ -1081,7 +1181,7 @@
                         summaryOutputDOM.innerHTML = '<p class="text-gray-500">Procesando resumen (simulado)...</p>';
                         setTimeout(() => {
                             const summary = "Este es un resumen simulado del texto proporcionado. " + text.substring(0, Math.min(text.length, 150)) + "... (Simulación)";
-                            summaryOutputDOM.innerHTML = `<div class="neumorphic-card !shadow-[var(--current-shadow-inset)] !p-4"><h4 class="font-semibold text-primary mb-2">Resumen Generado:</h4><p class="text-sm">${summary}</p></div>`;
+                            summaryOutputDOM.innerHTML = `<div class="neumorphic-card !shadow-[var(--neumorphism-light-shadow-inset)] !p-4"><h4 class="font-semibold text-primary mb-2">Resumen Generado:</h4><p class="text-sm">${summary}</p></div>`;
                         }, 1500);
                     } else if (summaryOutputDOM) {
                         summaryOutputDOM.innerHTML = '<p class="text-red-500 text-center">Por favor, ingresa texto para resumir.</p>';
@@ -1101,7 +1201,7 @@
                         qaOutputDOM.innerHTML = '<p class="text-gray-500">Generando Q&A (simulado)...</p>';
                         setTimeout(() => {
                             qaOutputDOM.innerHTML = `
-                                <div class="neumorphic-card !shadow-[var(--current-shadow-inset)] !p-4 space-y-3">
+                                <div class="neumorphic-card !shadow-[var(--neumorphism-light-shadow-inset)] !p-4 space-y-3">
                                     <div>
                                         <h4 class="font-semibold text-primary">Pregunta 1 (Simulada):</h4>
                                         <p class="text-sm">¿Cuál es el concepto principal presentado en el texto?</p>
@@ -1126,7 +1226,6 @@
                 });
             }
 
-            // Flashcards (Free)
             const flashcard = document.getElementById('flashcard');
             const prevFlashcardBtn = document.getElementById('prevFlashcard');
             const nextFlashcardBtn = document.getElementById('nextFlashcard');
@@ -1134,7 +1233,7 @@
                 const flashcardFront = flashcard.querySelector('.flashcard-front');
                 const flashcardBack = flashcard.querySelector('.flashcard-back');
                 let currentFlashcardIndex = 0;
-                const flashcardData = [ // Ensure this data is defined
+                const flashcardData = [ 
                     { q: "¿Qué es Neumorfismo?", a: "Un estilo de diseño que simula volumen y tacto con sombras y luces suaves." },
                     { q: "¿Versión de Firebase SDK usada?", a: "11.6.1 (Módulos ES)" },
                     { q: "¿Qué es Tailwind CSS?", a: "Un framework CSS de utilidad primero (utility-first)." }
@@ -1159,7 +1258,6 @@
                 if(flashcardData.length > 0) updateFlashcardDisplay();
             }
             
-            // PDF Upload (Simulation - Free)
             const uploadPdfBtn = document.getElementById('uploadPdfBtn');
             const pdfFile = document.getElementById('pdfFile');
             const pdfUploadStatus = document.getElementById('pdfUploadStatus');
@@ -1183,7 +1281,6 @@
                 }
             });
 
-            // Tab switching logic
             const tabButtons = document.querySelectorAll('#ia-tools-tabs .tab-button');
             const tabContents = document.querySelectorAll('#ia-tools-content .tab-content');
 
@@ -1208,28 +1305,23 @@
                 });
             });
             
-            // Initial tab state: Activate the first non-premium tab if no tab is active.
-            // Or, if a premium tab is active by default in HTML, and user is not premium, switch.
             const activeTabInitially = document.querySelector('#ia-tools-tabs .tab-button.active');
             let tabToActivate = null;
 
             if (activeTabInitially) {
                 const activeTabId = activeTabInitially.dataset.tab;
                  if ((activeTabId === 'summarizer' || activeTabId === 'qa-generator') && window.userSubscriptionPlan !== 'premium'){
-                    // Premium tab active by default, but user is not premium. Find first free tab.
                     tabToActivate = Array.from(tabButtons).find(btn => btn.dataset.tab === 'flashcards' || btn.dataset.tab === 'pdf-upload');
                  }
-            } else if (tabButtons.length > 0) { // No tab is active by default
+            } else if (tabButtons.length > 0) { 
                  tabToActivate = Array.from(tabButtons).find(btn => btn.dataset.tab === 'flashcards' || btn.dataset.tab === 'pdf-upload');
             }
             
             if (tabToActivate) {
                 tabToActivate.click();
             } else if (!activeTabInitially && tabButtons.length > 0) {
-                tabButtons[0].click(); // Fallback to first tab if no free tabs found (should not happen with current setup)
+                tabButtons[0].click(); 
             }
-
-
         });
     </script>
 </body>
